@@ -34,6 +34,14 @@ window.NEWS_DATA = [
 
   // 可點連結的卡片
   {
+    title: "台中市南區復興路人行道施工時間已逾7個月 嚴重影響民眾通行與地方商機 民進黨台中市議員陳雅惠要求市府儘速改善",
+    desc: "點一下看更多",
+    date: "2026-05-22",
+    source: "元丰傳媒／記者林獻元",
+    categories: ["議會 / 政策"],
+    href: "https://www.yuanfengmedia.tw/detail.php?type=lastest&id=56443"
+  },
+  {
     title: "垃圾車晚3小時！台中清運大亂，陳雅惠痛批市府「只會分類，不會處理」！",
     desc: "點一下看更多",
     date: "2026-03-27",
