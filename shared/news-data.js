@@ -34,6 +34,14 @@ window.NEWS_DATA = [
 
   // 可點連結的卡片
   {
+    title: "中市公車寒暑假就減班 議員批搭公車也有上班族遲到扣薪誰負責？",
+    desc: "點一下看更多",
+    date: "2026-07-09",
+    source: "自由時報／記者蘇金鳳",
+    categories: ["交通"],
+    href: "https://news.ltn.com.tw/news/politics/breakingnews/5499189?utm_medium=APP&utm_campaign=SHARE&utm_source=LINE"
+  }, 
+  {
     title: "台中市南區復興路人行道施工時間已逾7個月 嚴重影響民眾通行與地方商機 民進黨台中市議員陳雅惠要求市府儘速改善",
     desc: "點一下看更多",
     date: "2026-05-22",
