@@ -5,217 +5,39 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Q&A 常見問題</title>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="shared/design-system.css">
   <link rel="stylesheet" href="shared/topbar.css">
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+  <script src="shared/site.js" defer></script>
   <style>
-    body {
-      font-family: 'Noto Sans TC', sans-serif;
-      background-color: #f9f9f9;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-    }
-
-    .faq-header {
-      text-align: center;
-      margin-top: 10px;
-      padding: 0 20px;
-    }
-
-    .faq-title {
-      font-size: 2em;
-      color: #00993d;
-      margin-bottom: 10px;
-    }
-
-    .faq-desc {
-      font-size: 1em;
-      color: #555;
-      margin-bottom: 30px;
-    }
-
+    body { display: flex; flex-direction: column; min-height: 100vh; }
+    .faq-header { text-align: center; margin-top: 10px; padding: 0 20px; }
+    .faq-title { font-size: 2em; color: var(--primary); margin-bottom: 10px; }
+    .faq-desc { font-size: 1em; color: var(--text-muted); margin-bottom: 30px; line-height: 1.7; }
     .faq-section {
-      background: #fff;
-      padding: 40px 20px;
-      width: 800px;
-      max-width: 90vw;
-      margin: 0 auto 40px;
-      border-radius: 12px;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-      flex: 1;
+      background: var(--surface); padding: 40px 20px;
+      width: 800px; max-width: 90vw; margin: 0 auto 40px;
+      border-radius: var(--radius-md); box-shadow: var(--shadow-md); flex: 1;
     }
-
-    /* === 搜尋列改成跟首頁公告一樣的做法（含動畫） === */
-    .search-bar {
-      display: flex;
-      gap: 12px;
-      align-items: center;
-      margin: 0 0 30px;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-    .search-wrap {
-      position: relative;
-      flex: 1 1 420px;
-      max-width: 720px;
-    }
-    .search-wrap input {
-      width: 100%;
-      font-size: 16px;
-      padding: 12px 16px 12px 44px;      /* 左側留位置給放大鏡 */
-      border: 1px solid #ddd;
-      border-radius: 12px;
-      outline: none;
-      box-shadow: 0 2px 8px rgba(0,0,0,.06) inset;
-      transition: border .2s ease;        /* 邊框過渡動畫 */
-      background: #fff;
-    }
-    .search-wrap input:focus {
-      border-color: #00993d;              /* 聚焦變色 */
-    }
-    .search-wrap .icon {
-      position: absolute;
-      left: 14px;
-      top: 50%;
-      transform: translateY(-50%);
-      pointer-events: none;
-      font-size: 18px;
-    }
-    .search-bar select {
-      min-width: 110px;
-      font-size: 16px;
-      padding: 10px 12px;
-      border: 1px solid #111;
-      border-radius: 12px;
-      background: #fff;
-      cursor: pointer;
-    }
-
+    .search-bar { display: flex; gap: 12px; align-items: center; margin: 0 0 30px; flex-wrap: wrap; justify-content: center; }
     .faq-box {
-      border: 1px solid #e0e0e0;
-      padding: 20px;
-      border-radius: 10px;
-      margin-bottom: 20px;
-      background-color: #f9f9f9;
+      border: 1px solid var(--border); padding: 20px;
+      border-radius: var(--radius-md); margin-bottom: 20px;
+      background: var(--bg); transition: box-shadow var(--transition), transform var(--transition);
     }
-
-    .faq-question {
-      color: #00993d;
-      font-weight: bold;
-      margin-bottom: 10px;
-      font-size: 1.1em;
-    }
-
-    .faq-answer {
-      color: #333;
-      font-size: 1em;
-      line-height: 1.6;
-    }
-
-    .bottom-actions {
-      display: flex;
-      justify-content: center;
-      margin: 0px auto 28px;
-    }
-
-    .btn-home {
-      display: inline-block;
-      padding: 12px 24px;
-      background: #00993d;
-      color: #fff;
-      font-weight: 700;
-      border-radius: 10px;
-      text-decoration: none;
-      box-shadow: 0 2px 8px rgba(0,0,0,.08);
-      transition: background .2s ease, transform .15s ease;
-    }
-
-    .btn-home:hover {
-      background: #007a30;
-      transform: translateY(-1px);
-    }
-
-    footer {
-      background-color: #333;
-      color: #fff;
-      text-align: center;
-      padding: 20px 10px;
-      font-size: 0.9em;
-    }
-
-    footer p { margin: 5px 0; }
-    footer a { color: #fff; text-decoration: none; }
-
-    /* 手機寬度時，讓搜尋列改為直向排版更貼合寬度 */
-    @media (max-width: 900px) {
-      .search-bar {
-        padding: 0 4px;
-      }
-      .search-wrap {
-        flex: 1 1 100%;
-        max-width: 100%;
-      }
-    }
+    .faq-box:hover { box-shadow: var(--shadow-sm); transform: translateY(-2px); }
+    .faq-question { color: var(--primary-dark); font-weight: 700; margin-bottom: 10px; font-size: 1.05em; }
+    .faq-answer { color: #444; line-height: 1.7; }
+    .faq-answer a { color: var(--primary); text-decoration: underline; }
+    .bottom-actions { display: flex; justify-content: center; margin: 0 auto 28px; }
+    @media (max-width: 900px) { .search-wrap { flex: 1 1 100%; max-width: 100%; } }
   </style>
 </head>
 <body>
-
-  <!-- 這個占位會被替換成共用的綠色導覽列 -->
   <div id="topbar-mount"></div>
+  <script src="shared/topbar-loader.js"></script>
 
-  <script>
-    // 自動嘗試多個路徑前綴，兼容根目錄與子資料夾頁面
-    (function () {
-      const mountId = 'topbar-mount';
-      const prefixes = ['shared/', './shared/', '../shared/', '/shared/'];
-
-      async function tryLoad() {
-        for (const p of prefixes) {
-          try {
-            const res = await fetch(p + 'topbar.html', { cache: 'no-store' });
-            if (!res.ok) continue;
-
-            const html = await res.text();
-            const mount = document.getElementById(mountId);
-            if (!mount) return;
-
-            // 插入 HTML
-            mount.outerHTML = html;
-
-            // 確保 JS 載入
-            const s = document.createElement('script');
-            s.src = p + 'topbar.js';
-            document.body.appendChild(s);
-
-            // 若忘了在 <head> 引入 CSS，這裡也補上一份
-            if (!document.querySelector('link[href*="topbar.css"]')) {
-              const link = document.createElement('link');
-              link.rel = 'stylesheet';
-              link.href = p + 'topbar.css';
-              document.head.appendChild(link);
-            }
-            return; // 成功就結束
-          } catch (e) {}
-        }
-        // 全部失敗 → 在頁面顯示提示
-        const mount = document.getElementById(mountId);
-        if (mount) {
-          mount.innerHTML =
-            '<div style="background:#fee;border:1px solid #f99;color:#900;padding:10px;border-radius:8px;">' +
-            '無法載入 <code>shared/topbar.html</code>。請確認：<br>' +
-            '1) 以伺服器方式開啟（Live Server / localhost）<br>' +
-            '2) 此頁相對於 <code>/shared</code> 的路徑層級是否正確' +
-            '</div>';
-        }
-      }
-
-      tryLoad();
-    })();
-  </script>
-
-  <div class="faq-header">
+  <div class="faq-header reveal">
     <h2 class="faq-title">Q&A 常見問題</h2>
     <p class="faq-desc">以下是民眾常提出的疑問與解答，歡迎參考，如有更多問題也可以直接諮詢服務團隊。<br>
       🔍 可輸入關鍵字（如：愛心卡、水肥清運），並搭配分類選單（如：交通、陳情、長照）快速查詢相關問題。</p>
@@ -225,10 +47,10 @@
   <section class="faq-section">
     <div class="search-bar" aria-label="常見問題搜尋與分類">
       <div class="search-wrap">
-        <span class="icon">🔍</span>
+        <i data-lucide="search" class="search-icon" style="width:18px;height:18px"></i>
         <input id="searchInput" type="text" placeholder="輸入關鍵字查詢" aria-label="輸入關鍵字查詢">
       </div>
-      <select id="categorySelect" aria-label="分類篩選">
+      <select id="categorySelect" class="filter-select" aria-label="分類篩選">
         <option value="全部">全部</option>
         <option value="陳情">陳情</option>
         <option value="社會福利">社會福利</option>
@@ -320,14 +142,10 @@
   </section>
 
   <div class="bottom-actions">
-    <a href="index.html" class="btn-home">🏠 返回首頁</a>
+    <a href="index.html" class="btn btn-primary">返回首頁</a>
   </div>
 
-  <footer>
-    <p>© 陳雅惠議員服務團隊</p>
-    <p>服務處地址：臺中市南區正義街236號</p>
-    <p>聯絡電話：04-2282-4639</p>
-  </footer>
+  <div id="footer-mount"></div>
 
   <script>
     const searchInput = document.getElementById('searchInput');

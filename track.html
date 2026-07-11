@@ -5,156 +5,42 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>案件進度查詢 - 陳雅惠議員服務平台</title>
+  <link rel="stylesheet" href="shared/design-system.css">
   <link rel="stylesheet" href="shared/topbar.css">
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+  <script src="shared/site.js" defer></script>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f9f9f9;
-      padding-top: calc(var(--topbarH) + 0px) !important; /* 與 proposal 統一 */
-    }
-
-    /* 版心容器 */
-    .page {
-      max-width: 600px;
-      margin: 0 auto;
-      padding: 2em;
-    }
-
-    h1 {
-      text-align: center;
-      color: #00993d;
-    }
-
-    form {
-      background: #fff;
-      padding: 1.5em;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,.1);
-    }
-
-    label {
-      display: block;
-      margin-top: 1em;
-      font-weight: bold;
-    }
-
-    input {
-      width: 100%;
-      padding: .6em;
-      margin-top: .3em;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
-
-    /* 共用按鈕樣式 */
-    .action-button {
-      flex: 1;
-      text-align: center;
-      padding: 0.8em;
-      background: #00993d;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      font-size: 1em;
-      text-decoration: none;
-      cursor: pointer;
-      transition: background 0.3s ease, transform 0.2s ease;
-      display: inline-block;
-    }
-    .action-button:hover {
-      background: #007a30;
-      transform: scale(1.02);
-    }
-
+    body { min-height: 100svh; display: flex; flex-direction: column; }
+    .page-wrap { flex: 1; }
+    .button-row { display: flex; gap: 1em; margin-top: 1.5em; }
+    .button-row .action-button { flex: 1; width: auto; margin-top: 0; }
     .result {
-      margin-top: 1.5em;
-      padding: 1em;
-      background: #e8f4ff;
-      border: 1px solid #a6c8ff;
-      border-radius: 5px;
-      display: none;
-    }
-
-    footer {
-      text-align: center;
-      margin-top: 2em;
-      color: #777;
-      font-size: .9em;
+      margin-top: 1.5em; padding: 1.2em;
+      background: #e8f4ff; border: 1px solid #a6c8ff;
+      border-radius: var(--radius-md); display: none;
+      line-height: 1.7;
     }
   </style>
 </head>
 <body>
-
-  <!-- 這個占位會被替換成共用的綠色導覽列 -->
   <div id="topbar-mount"></div>
+  <script src="shared/topbar-loader.js"></script>
 
-  <script>
-    // 自動嘗試多個路徑前綴，兼容根目錄與子資料夾頁面
-    (function () {
-      const mountId = 'topbar-mount';
-      const prefixes = ['shared/', './shared/', '../shared/', '/shared/'];
+  <div class="page-wrap reveal">
+    <h1 class="page-title">案件進度查詢</h1>
+    <p class="page-subtitle">請輸入您填寫表單時的電子信箱與案件編號</p>
 
-      async function tryLoad() {
-        for (const p of prefixes) {
-          try {
-            const res = await fetch(p + 'topbar.html', { cache: 'no-store' });
-            if (!res.ok) continue;
-
-            const html = await res.text();
-            const mount = document.getElementById(mountId);
-            if (!mount) return;
-
-            // 插入 HTML
-            mount.outerHTML = html;
-
-            // 確保 JS 載入
-            const s = document.createElement('script');
-            s.src = p + 'topbar.js';
-            document.body.appendChild(s);
-
-            // 若你忘了在 <head> 引入 CSS，這裡也補上一份（避免 404 時重複）
-            if (!document.querySelector('link[href*="topbar.css"]')) {
-              const link = document.createElement('link');
-              link.rel = 'stylesheet';
-              link.href = p + 'topbar.css';
-              document.head.appendChild(link);
-            }
-            return; // 成功就結束
-          } catch (e) {}
-        }
-        // 全部失敗 → 在頁面顯示提示，方便排錯
-        const mount = document.getElementById(mountId);
-        if (mount) {
-          mount.innerHTML =
-            '<div style="background:#fee;border:1px solid #f99;color:#900;padding:10px;border-radius:8px;">' +
-            '無法載入 <code>shared/topbar.html</code>。請確認：<br>' +
-            '1) 以伺服器方式開啟（Live Server / localhost）<br>' +
-            '2) 此頁相對於 <code>/shared</code> 的路徑層級是否正確' +
-            '</div>';
-        }
-      }
-
-      tryLoad();
-    })();
-  </script>
-
-  <div class="page">
-    <h1>🔍 案件進度查詢</h1>
-    <p style="text-align:center;">請輸入您填寫表單時的電子信箱與案件編號</p>
-
-    <form id="trackForm" onsubmit="handleSearch(event)">
+    <form id="trackForm" class="form-card" onsubmit="handleSearch(event)">
       <label for="email">電子信箱</label>
       <input type="email" id="email" required />
 
       <label for="caseid">案件編號</label>
       <input type="text" id="caseid" required />
-      <p style="font-size:0.9em;color:#666;margin-top:0.2em;">
-        例如：ABC-20260207
-      </p>
+      <p style="font-size:0.9em;color:var(--text-muted);margin-top:0.3em;">例如：ABC-20260207</p>
 
-      <div style="display: flex; gap: 1em; margin-top: 1.5em;">
-        <a href="index.html" class="action-button">🏠 回首頁</a>
-        <button type="submit" class="action-button">🔍 查詢案件</button>
+      <div class="button-row">
+        <a href="index.html" class="action-button">回首頁</a>
+        <button type="submit" class="action-button">查詢案件</button>
       </div>
     </form>
 
@@ -162,13 +48,9 @@
       <strong>查詢結果：</strong>
       <p id="resultText">（這裡會顯示查詢到的案件狀態）</p>
     </div>
-
-    <footer>
-      © 陳雅惠議員服務團隊<br>
-      服務處地址：台中市南區正義街236號<br>
-      聯絡電話：04-2282-4639
-    </footer>
   </div>
+
+  <div id="footer-mount"></div>
 
   <script>
   function normalize(str){
@@ -198,7 +80,7 @@
 
       if (row) {
         const note = (row['備註'] || '').replaceAll('\\n','<br/>');
-        txt.innerHTML = `🔍 案件狀態：<strong>${row['案件狀態']}</strong><br/>📝 備註：${note || '—'}`;
+        txt.innerHTML = `案件狀態：<strong>${row['案件狀態']}</strong><br/>備註：${note || '—'}`;
       } else {
         txt.innerHTML = '<span style="color:red;">查無此案件，請確認輸入正確（請使用半形英數）。</span>';
       }

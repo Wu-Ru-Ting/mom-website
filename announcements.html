@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>服務處公告 - 陳雅惠議員服務平台</title>
+  <meta name="description" content="陳雅惠議員服務處最新公告，包含活動預約、法律諮詢、服務處行程等資訊。" />
+  <link rel="stylesheet" href="shared/design-system.css">
+  <link rel="stylesheet" href="shared/topbar.css">
+  <link rel="stylesheet" href="shared/bulletin-page.css">
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+  <script src="shared/site.js" defer></script>
+</head>
+<body class="bulletin-page">
+  <div id="topbar-mount"></div>
+  <script src="shared/topbar-loader.js"></script>
+
+  <main>
+    <script src="shared/news-data.js"></script>
+
+    <section class="bulletin-block container bulletin reveal" id="service">
+      <div class="section-header">
+        <h1 class="page-title" style="text-align:left;margin-bottom:0.3em;">
+          <span class="section-icon"><i data-lucide="bell" style="width:24px;height:24px"></i></span>
+          服務處公告
+        </h1>
+      </div>
+      <p class="bulletin-tip">可輸入關鍵字（如：法律、中秋），並搭配分類選單（如：需預約、不需報名）快速查詢相關資訊。</p>
+      <div class="controls" aria-label="服務處搜尋與分類">
+        <div class="search-wrap">
+          <i data-lucide="search" class="search-icon" style="width:18px;height:18px"></i>
+          <input id="service-search" type="search" placeholder="輸入關鍵字查詢" aria-label="輸入關鍵字查詢">
+        </div>
+        <select id="service-filter" class="filter-select" aria-label="分類篩選">
+          <option value="全部" selected>全部</option>
+          <option value="需預約">需預約</option>
+          <option value="不需報名">不需報名</option>
+          <option value="其他">其他</option>
+        </select>
+      </div>
+      <div class="bgrid" id="service-list"></div>
+      <nav class="pager" id="service-pager" aria-label="公告分頁"></nav>
+      <div class="bulletin-more">
+        <a href="index.html" class="btn btn-secondary btn-sm">返回首頁</a>
+      </div>
+    </section>
+  </main>
+
+  <div id="footer-mount"></div>
+
+  <div id="lightbox" class="lightbox" aria-modal="true" role="dialog">
+    <button class="close" aria-label="關閉">✕</button>
+    <img alt="公告圖片預覽">
+  </div>
+
+  <script src="shared/bulletin.js"></script>
+  <script>
+    initBulletin({
+      dataSource: window.SERVICE_DATA,
+      listId: 'service-list',
+      searchId: 'service-search',
+      filterId: 'service-filter',
+      pagerId: 'service-pager',
+      anchorId: 'service',
+      perPage: 9,
+      enableImages: true,
+      enableDataCat: true
+    });
+  </script>
+</body>
+</html>

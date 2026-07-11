@@ -22,11 +22,13 @@
 
   function openMenu(){
     menu.classList.add('open'); backdrop.classList.add('show');
+    btn.classList.add('open');
     btn.setAttribute('aria-expanded','true'); menu.setAttribute('aria-hidden','false');
     document.documentElement.style.overflow='hidden'; document.body.style.overflow='hidden';
   }
   function closeMenu(){
     menu.classList.remove('open'); backdrop.classList.remove('show');
+    btn.classList.remove('open');
     btn.setAttribute('aria-expanded','false'); menu.setAttribute('aria-hidden','true');
     document.documentElement.style.overflow=''; document.body.style.overflow='';
   }

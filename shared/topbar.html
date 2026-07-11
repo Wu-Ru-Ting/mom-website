@@ -1,40 +1,63 @@
-<!-- 只含綠色導覽列 + 手機抽屜 + 遮罩 -->
+<!-- 導覽列 + 手機抽屜 -->
 <div class="topbar">
   <nav class="nav" aria-label="主選單">
     <a href="index.html" class="brand" aria-label="回首頁">
-      陳雅惠議員<span class="m-br"></span>民意交流與服務平台
-      <div class="slogan">為民服務 × 政策參與 × 進度透明</div>
+      <div class="brand-logo">
+        <img src="shared/民進黨黨徽.png" alt="民主進步黨黨徽" class="dpp-logo" width="48" height="48">
+      </div>
+      <div class="brand-text">
+        <div class="brand-name">陳雅惠議員<span class="m-br"></span>民意交流與服務平台</div>
+        <div class="slogan">為民服務 × 政策參與 × 進度透明</div>
+      </div>
     </a>
 
     <!-- 桌機選單 -->
     <div class="nav-links">
       <div class="nav-item">
-        <a class="btn" href="about.html">⭐ 關於議員</a>
+        <a class="btn" href="about.html">
+          <i data-lucide="user" class="nav-icon"></i> 關於議員
+        </a>
         <div class="dropdown-panel">想更認識陳雅惠議員的經歷、理念與社群參與？歡迎點進來看看她的故事與行動！</div>
       </div>
       <div class="nav-item">
-        <a class="btn" href="faq.html">📌 常見問題</a>
+        <a class="btn" href="messages.html">
+          <i data-lucide="newspaper" class="nav-icon"></i> 消息報你知
+        </a>
+        <div class="dropdown-panel">服務處公告與相關新聞一手掌握，活動消息、議會質詢報導都在這裡。</div>
+      </div>
+      <div class="nav-item">
+        <a class="btn" href="faq.html">
+          <i data-lucide="help-circle" class="nav-icon"></i> 常見問題
+        </a>
         <div class="dropdown-panel">在日常生活中遇到什麼問題？我們整理常見問題供您參考。</div>
       </div>
       <div class="nav-item">
-        <a class="btn" href="legal-time.html">⚖️ 法律諮詢</a>
+        <a class="btn" href="legal-time.html">
+          <i data-lucide="scale" class="nav-icon"></i> 法律諮詢
+        </a>
         <div class="dropdown-panel">生活遇到法律問題需要幫助嗎？我們提供免費初步諮詢，協助您釐清權益與對策。</div>
       </div>
       <div class="nav-item">
-        <a class="btn" href="contact.html">📬 陳情服務</a>
+        <a class="btn" href="contact.html">
+          <i data-lucide="mail" class="nav-icon"></i> 陳情服務
+        </a>
         <div class="dropdown-panel">如果您遇到民生、交通、環境等問題，歡迎透過表單陳情，我們將盡快處理。</div>
       </div>
       <div class="nav-item">
-        <a class="btn" href="proposal.html">💡 政見建議</a>
+        <a class="btn" href="proposal.html">
+          <i data-lucide="lightbulb" class="nav-icon"></i> 政見建議
+        </a>
         <div class="dropdown-panel">您希望議員在議會推動什麼政策嗎？歡迎提供想法與建議，我們將認真參考。</div>
       </div>
       <div class="nav-item">
-        <a class="btn" href="track.html">🔍 案件進度</a>
+        <a class="btn" href="track.html">
+          <i data-lucide="search" class="nav-icon"></i> 案件進度
+        </a>
         <div class="dropdown-panel">查詢您已提交的陳情案件處理進度，需輸入案件編號與電子信箱。</div>
       </div>
     </div>
 
-    <!-- 手機：右側按鈕 -->
+    <!-- 手機漢堡選單 -->
     <button class="hamburger" id="menuToggle" aria-label="開啟選單" aria-controls="mobileMenu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
@@ -48,17 +71,32 @@
     <span>選單</span>
     <button class="close" id="menuClose" aria-label="關閉選單">✕</button>
   </div>
-  <a class="m-link" href="about.html">⭐ 關於議員</a>
-  <p class="m-desc">想更認識陳雅惠議員的經歷、理念與社群參與？歡迎點進來看看她的故事與行動！</p>
-  <a class="m-link" href="faq.html">📌 常見問題</a>
-  <p class="m-desc">在日常生活中遇到什麼問題？我們整理常見問題供您參考。</p>
-  <a class="m-link" href="legal-time.html">⚖️ 法律諮詢</a>
-  <p class="m-desc">生活遇到法律問題需要幫助嗎？我們提供免費初步諮詢，協助您釐清權益與對策。</p>
-  <a class="m-link" href="contact.html">📬 陳情服務</a>
-  <p class="m-desc">如果您遇到民生、交通、環境等問題，歡迎透過表單陳情，我們將盡快處理。</p>
-  <a class="m-link" href="proposal.html">💡 政見建議</a>
-  <p class="m-desc">您希望議員在議會推動什麼政策嗎？歡迎提供想法與建議，我們將認真參考。</p>
-  <a class="m-link" href="track.html">🔍 案件進度</a>
-  <p class="m-desc">查詢您已提交的陳情案件處理進度，需輸入案件編號與電子信箱。</p>
+  <a class="m-link" href="about.html">
+    <i data-lucide="user" class="m-icon"></i> 關於議員
+  </a>
+  <p class="m-desc">想更認識陳雅惠議員的經歷、理念與社群參與？</p>
+  <a class="m-link" href="messages.html">
+    <i data-lucide="newspaper" class="m-icon"></i> 消息報你知
+  </a>
+  <p class="m-desc">服務處公告與相關新聞，掌握最新動態。</p>
+  <a class="m-link" href="faq.html">
+    <i data-lucide="help-circle" class="m-icon"></i> 常見問題
+  </a>
+  <p class="m-desc">我們整理常見問題供您參考。</p>
+  <a class="m-link" href="legal-time.html">
+    <i data-lucide="scale" class="m-icon"></i> 法律諮詢
+  </a>
+  <p class="m-desc">免費初步法律諮詢，協助釐清權益與對策。</p>
+  <a class="m-link" href="contact.html">
+    <i data-lucide="mail" class="m-icon"></i> 陳情服務
+  </a>
+  <p class="m-desc">遇到民生、交通、環境等問題，歡迎陳情。</p>
+  <a class="m-link" href="proposal.html">
+    <i data-lucide="lightbulb" class="m-icon"></i> 政見建議
+  </a>
+  <p class="m-desc">歡迎提供政策想法與建議。</p>
+  <a class="m-link" href="track.html">
+    <i data-lucide="search" class="m-icon"></i> 案件進度
+  </a>
+  <p class="m-desc">查詢陳情案件處理進度。</p>
 </aside>
-

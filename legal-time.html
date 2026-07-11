@@ -1,167 +1,58 @@
-<!-- legal.time.html -->
+<!-- legal-time.html -->
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>法律諮詢時間 - 陳雅惠議員服務平台</title>
+  <link rel="stylesheet" href="shared/design-system.css">
   <link rel="stylesheet" href="shared/topbar.css">
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+  <script src="shared/site.js" defer></script>
   <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background: #f9f9f9;
-      font-family: 'Noto Sans TC', sans-serif;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-    }
-
-    h1 {
-      text-align: center;
-      color: #00993d;
-      margin: 30px 20px 10px;
-      font-size: 2em;     /* 和 FAQ 相同 */
-      font-weight: 700;   /* 加上粗體 */
-    }
-
+    body { min-height: 100svh; display: flex; flex-direction: column; }
+    .content-wrap { flex: 1; padding-bottom: var(--space-lg); }
     .image-container {
-      width: 90%;
-      max-width: 700px;
-      margin: 0 auto;
-      padding: 20px;
+      width: 90%; max-width: 700px;
+      margin: 0 auto; padding: var(--space-sm);
     }
-
     .image-container img {
-      width: 100%;
-      height: auto;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      width: 100%; border-radius: var(--radius-md);
+      box-shadow: var(--shadow-md);
     }
-
     .center-button {
-      display: flex;
-      justify-content: center;
-      gap: 16px;      /* ← 兩顆按鈕的間距 */
-      flex-wrap: wrap;/* 小螢幕時可自動換行 */
-      margin-top: 10px;
+      display: flex; justify-content: center;
+      gap: var(--space-sm); flex-wrap: wrap;
+      margin-top: var(--space-sm);
     }
-
-    .btn-line {
-      display: inline-block;
-      padding: 12px 25px;
-      background-color: #00993d;
-      color: white;
-      font-weight: bold;
-      border: none;
-      border-radius: 8px;
-      font-size: 1em;
-      text-decoration: none;
-      transition: background 0.3s ease;
-    }
-
-    .btn-line:hover {
-      background-color: #007a30;
-      transform: scale(1.02);
-    }
-
     .note {
-      text-align: center;
-      font-size: 0.95em;
-      color: #333;
-      margin-top: 10px;
-      margin-bottom: 40px;  /* ⬅️ 加這行就會拉開與 footer 的距離 */
-      padding: 0 20px;
-    }
-
-    footer {
-      margin-top: auto;
-      background: #333;
-      color: white;
-      text-align: center;
-      padding: 15px;
-      font-size: 0.95em;
-      line-height: 1.6;
+      text-align: center; color: var(--text-muted);
+      margin: var(--space-sm) auto var(--space-lg);
+      padding: 0 var(--space-sm);
     }
   </style>
 </head>
 <body>
+  <div id="topbar-mount"></div>
+  <script src="shared/topbar-loader.js"></script>
 
-  <!-- 這個占位會被替換成共用的綠色導覽列 -->
-<div id="topbar-mount"></div>
+  <div class="content-wrap reveal">
+    <h1 class="page-title" style="margin-top:var(--space-md);">法律諮詢時間</h1>
 
-<script>
-  // 自動嘗試多個路徑前綴，兼容根目錄與子資料夾頁面
-  (function () {
-    const mountId = 'topbar-mount';
-    const prefixes = ['shared/', './shared/', '../shared/', '/shared/'];
+    <div class="image-container">
+      <img src="legal-schedule.jpg" alt="法律諮詢時間表">
+    </div>
 
-    async function tryLoad() {
-      for (const p of prefixes) {
-        try {
-          const res = await fetch(p + 'topbar.html', { cache: 'no-store' });
-          if (!res.ok) continue;
+    <div class="center-button">
+      <a href="index.html" class="btn btn-secondary">返回首頁</a>
+      <a href="https://lin.ee/hR8ZJk4" class="btn btn-primary" target="_blank" rel="noopener">
+        我要預約 <i data-lucide="arrow-right" class="btn-icon" style="width:16px;height:16px"></i>
+      </a>
+    </div>
 
-          const html = await res.text();
-          const mount = document.getElementById(mountId);
-          if (!mount) return;
-
-          // 插入 HTML
-          mount.outerHTML = html;
-
-          // 確保 JS 載入
-          const s = document.createElement('script');
-          s.src = p + 'topbar.js';
-          document.body.appendChild(s);
-
-          // 若你忘了在 <head> 引入 CSS，這裡也補上一份（避免 404 時重複）
-          if (!document.querySelector('link[href*="topbar.css"]')) {
-            const link = document.createElement('link');
-            link.rel = 'stylesheet';
-            link.href = p + 'topbar.css';
-            document.head.appendChild(link);
-          }
-          return; // 成功就結束
-        } catch (e) {}
-      }
-      // 全部失敗 → 在頁面顯示提示，方便排錯
-      const mount = document.getElementById(mountId);
-      if (mount) {
-        mount.innerHTML =
-          '<div style="background:#fee;border:1px solid #f99;color:#900;padding:10px;border-radius:8px;">' +
-          '無法載入 <code>shared/topbar.html</code>。請確認：<br>' +
-          '1) 以伺服器方式開啟（Live Server / localhost）<br>' +
-          '2) 此頁相對於 <code>/shared</code> 的路徑層級是否正確' +
-          '</div>';
-      }
-    }
-
-    tryLoad();
-  })();
-</script>
-
-  <h1>法律諮詢時間</h1>
-
-  <div class="image-container">
-    <img src="legal-schedule.jpg" alt="法律諮詢時間表">
+    <p class="note">官方 LINE 提供法律諮詢預約服務，歡迎點擊上方按鈕與我們聯繫。</p>
   </div>
 
-  <div class="center-button">
-    <a href="index.html" class="btn-line btn-home">🏠 返回首頁</a>
-    <a href="https://lin.ee/hR8ZJk4" class="btn-line" target="_blank">💬 我要預約</a>
-  </div>
-
-  <div class="note">
-    官方 LINE 提供法律諮詢預約服務，歡迎點擊上方按鈕與我們聯繫。
-  </div>
-
-  <footer>
-    &copy; 陳雅惠議員服務團隊<br>
-    服務處地址：台中市南區正義街236號<br>
-    聯絡電話：04-2282-4639
-  </footer>
-
+  <div id="footer-mount"></div>
 </body>
 </html>
-
-

@@ -1,0 +1,36 @@
+/* 公告／新聞頁面共用樣式 */
+body.bulletin-page { min-height: 100svh; display: flex; flex-direction: column; }
+.bulletin-page main { flex: 1; }
+
+.bulletin .news .title { font-weight: 700; color: var(--primary-dark); }
+.bulletin .news .desc { font-size: 0.9rem; color: #444; line-height: 1.5; margin-top: 6px; }
+.bulletin .meta { font-size: 0.86rem; color: #666; margin-top: 4px; }
+.bulletin .news.is-static { cursor: default; }
+.bulletin .news { padding-top: 12px; }
+
+.bulletin-block { padding: var(--space-xl) 0; }
+.bulletin-block .section-header { text-align: left; margin-bottom: var(--space-md); }
+.bulletin-block .section-header h2 { justify-content: flex-start; }
+.bulletin-tip {
+  font-size: 0.95rem; color: var(--text-muted); line-height: 1.6;
+  margin-bottom: var(--space-sm);
+}
+.bulletin .controls {
+  display: flex; gap: 12px; align-items: center;
+  margin-bottom: var(--space-sm); flex-wrap: wrap;
+}
+.bgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-sm); }
+.pager .ellipsis { padding: 0 4px; color: #666; }
+
+.bulletin-more {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--space-md);
+}
+
+.bulletin-preview .controls,
+.bulletin-preview .pager { display: none; }
+
+@media (max-width: 900px) {
+  .bgrid { grid-template-columns: 1fr; }
+}

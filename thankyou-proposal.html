@@ -6,149 +6,35 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>送出成功 - 政見建議表單</title>
+  <link rel="stylesheet" href="shared/design-system.css">
   <link rel="stylesheet" href="shared/topbar.css">
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+  <script src="shared/site.js" defer></script>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f9f9f9;
-      max-width: 600px;
-      margin: auto;
-      text-align: center;
-      padding-left: 2em;
-      padding-right: 2em;
-      padding-bottom: 2em;
-    }
-
-    .thankyou-box {
-      background-color: white;
-      padding: 2em;
-      border-radius: 12px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-
-      /* 與綠色 topbar 保持距離 */
-      margin-top: 5em;
-    }
-
-    .note {
-      margin-top: 1.5em;
-      font-size: 1.1em;
-      color: #333;
-    }
-
-    .buttons {
-      margin-top: 2em;
-      display: flex;
-      justify-content: center;
-      gap: 1em;
-      flex-wrap: wrap;
-    }
-
-    a.button {
-      display: inline-block;
-      text-decoration: none;
-      color: white;
-      background-color: #00993d;
-      padding: 0.8em 1.5em;
-      border-radius: 8px;
-      font-weight: bold;
-      transition: background 0.3s ease, transform 0.2s ease;
-    }
-
-    a.button:hover {
-      background-color: #007a30;
-      transform: scale(1.05);
-    }
-
-    footer {
-      text-align: center;
-      margin-top: 2em;
-      color: #777;
-      font-size: .9em;
-    }
-
-    /* 保持 slogan 靠左 */
-    .brand .slogan {
-      text-align: left !important;
-    }
-
-    /* 手機抽屜描述靠左 */
-    .m-desc {
-      text-align: left !important;
-    }
-
-    /* 電腦版下拉介紹文字靠左 */
-    .dropdown-panel {
-      text-align: left !important;
-    }
+    body { min-height: 100svh; display: flex; flex-direction: column; }
+    .content-wrap { flex: 1; padding: 2em var(--space-sm); padding-top: calc(var(--topbarH) + 2em); }
+    .buttons { margin-top: 2em; display: flex; justify-content: center; gap: 1em; flex-wrap: wrap; }
   </style>
 </head>
 <body>
+  <div id="topbar-mount"></div>
+  <script src="shared/topbar-loader.js"></script>
 
-<!-- 這個占位會被替換成共用的綠色導覽列 -->
-<div id="topbar-mount"></div>
-
-<script>
-  (function () {
-    const mountId = 'topbar-mount';
-    const prefixes = ['shared/', './shared/', '../shared/', '/shared/'];
-
-    async function tryLoad() {
-      for (const p of prefixes) {
-        try {
-          const res = await fetch(p + 'topbar.html', { cache: 'no-store' });
-          if (!res.ok) continue;
-
-          const html = await res.text();
-          const mount = document.getElementById(mountId);
-          if (!mount) return;
-
-          mount.outerHTML = html;
-
-          const s = document.createElement('script');
-          s.src = p + 'topbar.js';
-          document.body.appendChild(s);
-
-          if (!document.querySelector('link[href*="topbar.css"]')) {
-            const link = document.createElement('link');
-            link.rel = 'stylesheet';
-            link.href = p + 'topbar.css';
-            document.head.appendChild(link);
-          }
-          return;
-        } catch (e) {}
-      }
-      const mount = document.getElementById(mountId);
-      if (mount) {
-        mount.innerHTML =
-          '<div style="background:#fee;border:1px solid #f99;color:#900;padding:10px;border-radius:8px;">' +
-          '無法載入 <code>shared/topbar.html</code>。請確認：<br>' +
-          '1) 以伺服器方式開啟（Live Server / localhost）<br>' +
-          '2) 此頁相對於 <code>/shared</code> 的路徑層級是否正確' +
-          '</div>';
-      }
-    }
-
-    tryLoad();
-  })();
-</script>
-
-  <div class="thankyou-box">
-    <h1>🎉 您的建議已成功送出！</h1>
-    <p class="note">
-      感謝您的寶貴建議，<br>
-      團隊將會彙整意見後進一步研議。<br>
-      感謝您的關心與參與！
-    </p>
-    <div class="buttons">
-      <a href="index.html" class="button">🏠 返回首頁</a>
-      <a href="proposal.html" class="button">📝 再填一份建議</a>
+  <div class="content-wrap reveal">
+    <div class="thankyou-box">
+      <h1 class="page-title">您的建議已成功送出！</h1>
+      <p class="note" style="color:var(--text-muted);line-height:1.8;">
+        感謝您的寶貴建議，<br>
+        團隊將會彙整意見後進一步研議。<br>
+        感謝您的關心與參與！
+      </p>
+      <div class="buttons">
+        <a href="index.html" class="primary-btn">返回首頁</a>
+        <a href="proposal.html" class="btn btn-secondary">再填一份建議</a>
+      </div>
     </div>
   </div>
 
-  <footer>
-    © 陳雅惠議員服務團隊<br>
-    服務處地址：台中市南區正義街236號<br>
-    聯絡電話：04-2282-4639
-  </footer>
+  <div id="footer-mount"></div>
 </body>
 </html>

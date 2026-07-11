@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>相關新聞 - 陳雅惠議員服務平台</title>
+  <meta name="description" content="陳雅惠議員相關新聞與議會質詢報導，涵蓋民生、交通、教育、在地建設等議題。" />
+  <link rel="stylesheet" href="shared/design-system.css">
+  <link rel="stylesheet" href="shared/topbar.css">
+  <link rel="stylesheet" href="shared/bulletin-page.css">
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+  <script src="shared/site.js" defer></script>
+</head>
+<body class="bulletin-page">
+  <div id="topbar-mount"></div>
+  <script src="shared/topbar-loader.js"></script>
+
+  <main>
+    <script src="shared/news-data.js"></script>
+
+    <section class="bulletin-block container bulletin reveal" id="bulletin">
+      <div class="section-header">
+        <h1 class="page-title" style="text-align:left;margin-bottom:0.3em;">
+          <span class="section-icon"><i data-lucide="newspaper" style="width:24px;height:24px"></i></span>
+          相關新聞
+        </h1>
+      </div>
+      <p class="bulletin-tip">可輸入關鍵字（如：公托、颱風），並搭配分類選單（如：教育、公共安全）快速查詢相關資訊。</p>
+      <div class="controls" aria-label="新聞搜尋與分類">
+        <div class="search-wrap">
+          <i data-lucide="search" class="search-icon" style="width:18px;height:18px"></i>
+          <input id="bulletin-search" type="search" placeholder="輸入關鍵字查詢" aria-label="輸入關鍵字查詢">
+        </div>
+        <select id="bulletin-filter" class="filter-select" aria-label="分類篩選">
+          <option value="全部" selected>全部</option>
+          <option value="在地活動">在地活動</option>
+          <option value="議會 / 政策">議會(質詢) / 政策</option>
+          <option value="民生">民生</option>
+          <option value="交通">交通</option>
+          <option value="在地建設">在地建設</option>
+          <option value="教育">教育</option>
+          <option value="公共安全">公共安全（自然災害、防疫、治安...）</option>
+          <option value="政治參與">政治參與</option>
+          <option value="其他">其他</option>
+        </select>
+      </div>
+      <div class="bgrid" id="bulletin-list"></div>
+      <nav class="pager" id="bulletin-pager" aria-label="新聞分頁"></nav>
+      <div class="bulletin-more">
+        <a href="index.html" class="btn btn-secondary btn-sm">返回首頁</a>
+      </div>
+    </section>
+  </main>
+
+  <div id="footer-mount"></div>
+
+  <script src="shared/bulletin.js"></script>
+  <script>
+    initBulletin({
+      dataSource: window.NEWS_DATA,
+      listId: 'bulletin-list',
+      searchId: 'bulletin-search',
+      filterId: 'bulletin-filter',
+      pagerId: 'bulletin-pager',
+      anchorId: 'bulletin',
+      perPage: 12
+    });
+  </script>
+</body>
+</html>

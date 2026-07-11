@@ -5,135 +5,30 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>陳情表單 - 陳雅惠議員服務團隊</title>
+  <link rel="stylesheet" href="shared/design-system.css">
   <link rel="stylesheet" href="shared/topbar.css">
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+  <script src="shared/site.js" defer></script>
   <style>
-    /* 保留 body 底色與字體，避免壓掉 topbar.css 的 padding-top */
-    body{
-      font-family: Arial, sans-serif;
-      background:#f9f9f9;
-    }
-    .page > h1{
-      margin-top: 0;
-    }
-    
-    /* 用 .page 包內容，承接原本的 margin/padding */
-    .page{
-      max-width:600px;
-      margin:0 auto;
-      padding:2em;
-    }
-
-    h1{ text-align:center; color:#00993d; }
-
-    .page form{
-      background:#fff;
-      padding:1.5em;
-      border-radius:10px;
-      box-shadow:0 0 10px rgba(0,0,0,.1);
-    }
-    .page form label{
-      display:block; margin-top:1em; font-weight:bold;
-    }
-    .page form input,
-    .page form textarea,
-    .page form select{
-      width:100%; padding:.6em; margin-top:.3em;
-      border:1px solid #ccc; border-radius:5px;
-      font:inherit;
-    }
-    .page form button{
-      margin-top:1.5em;
-      padding:.8em;
-      background:#00993d;
-      color:#fff;
-      border:none;
-      border-radius:5px;
-      width:100%;
-      font-size:1em;
-      cursor:pointer;
-      transition:background .3s ease, transform .2s ease;
-    }
-    .page form button:hover{
-      background:#007a30;
-      transform:scale(1.02);
-    }
-
-    .sending-text{
-      text-align:center; color:#666;
-      font-weight:bold; margin-top:1em;
-      display:none; animation:fadeIn .6s ease-in-out;
-    }
-    @keyframes fadeIn{
-      from{ opacity:0; transform:translateY(10px);}
-      to{ opacity:1; transform:translateY(0);}
-    }
-
-    .page footer{
-      text-align:center;
-      margin-top:2em;
-      color:#777;
-      font-size:.9em;
-    }
+    body { min-height: 100svh; display: flex; flex-direction: column; }
+    .page-wrap { flex: 1; }
   </style>
 </head>
 <body>
-
-  <!-- 這個占位會被替換成共用的綠色導覽列 -->
   <div id="topbar-mount"></div>
+  <script src="shared/topbar-loader.js"></script>
 
-  <script>
-    (function () {
-      const mountId = 'topbar-mount';
-      const prefixes = ['shared/', './shared/', '../shared/', '/shared/'];
-      async function tryLoad() {
-        for (const p of prefixes) {
-          try {
-            const res = await fetch(p + 'topbar.html', { cache: 'no-store' });
-            if (!res.ok) continue;
-            const html = await res.text();
-            const mount = document.getElementById(mountId);
-            if (!mount) return;
-            mount.outerHTML = html;
-            const s = document.createElement('script');
-            s.src = p + 'topbar.js';
-            document.body.appendChild(s);
-            if (!document.querySelector('link[href*="topbar.css"]')) {
-              const link = document.createElement('link');
-              link.rel = 'stylesheet';
-              link.href = p + 'topbar.css';
-              document.head.appendChild(link);
-            }
-            return;
-          } catch(e){}
-        }
-        const mount = document.getElementById(mountId);
-        if (mount) {
-          mount.innerHTML =
-            '<div style="background:#fee;border:1px solid #f99;color:#900;padding:10px;border-radius:8px;">' +
-            '無法載入 <code>shared/topbar.html</code>。請確認：<br>' +
-            '1) 以伺服器方式開啟（Live Server / localhost）<br>' +
-            '2) 此頁相對於 <code>/shared</code> 的路徑層級是否正確' +
-            '</div>';
-        }
-      }
-      tryLoad();
-    })();
-  </script>
-
-  <div class="page">
-    <h1>📬 陳情表單</h1>
-    <p style="text-align:center;">
+  <div class="page-wrap reveal">
+    <h1 class="page-title">陳情表單</h1>
+    <p class="page-subtitle">
       請留下您的聯絡資訊與需求<br>
-      您可於服務平台首頁點選「🔍 案件進度查詢」查看案件進度
+      您可於首頁點選「案件進度查詢」查看案件進度
     </p>
 
-    <form id="petitionForm">
-      <!-- 注意事項區塊 -->
-      <section style="background:#fff0f0;border:1px solid #ffcccc;padding:1em;margin-bottom:2em;">
-        <h3 style="color:#cc0000;text-align:left;">⚠ 注意事項</h3>
-        <p style="margin-top:0.5em; margin-bottom:1em; color:#cc0000; font-weight:bold; font-size:1.17em; line-height:1.4;">
-          <strong>請您先詳讀下列說明後再登錄案件</strong>
-        </p>
+    <form id="petitionForm" class="form-card">
+      <section class="notice-box">
+        <h3>注意事項</h3>
+        <p style="color:#cc0000;font-weight:700;margin-bottom:1em;">請您先詳讀下列說明後再登錄案件</p>
         <ol style="padding-left:1.2em;text-align:left;">
           <li>『*』欄位務必輸入。</li>
           <li>檢舉人基本資料將採保密方式處理，但因業務需要，承辦機關得調閱陳情人基本資料以供處理。</li>
@@ -201,13 +96,9 @@
     </form>
 
     <p class="sending-text" id="sendingText">寄件中，請稍等...</p>
-
-    <footer>
-      © 陳雅惠議員服務團隊<br>
-      服務處地址:台中市南區正義街236號<br>
-      聯絡電話：04-2282-4639
-    </footer>
   </div>
+
+  <div id="footer-mount"></div>
 
   <script>
   document.getElementById("petitionForm").addEventListener("submit", async (e) => {

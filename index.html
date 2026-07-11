@@ -36,224 +36,15 @@
 
   <title>陳雅惠議員 - 民意交流與服務平台</title>
 
-  <!-- 字體 -->
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@500;700&display=swap" rel="stylesheet" />
-
-  <!-- ✅ 共用 topbar 樣式（固定導覽列、手機抽屜、遮罩、間距都在這裡處理） -->
+  <link rel="stylesheet" href="shared/design-system.css">
   <link rel="stylesheet" href="shared/topbar.css">
-  
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+  <script src="shared/site.js" defer></script>
+
   <style>
-  /* --- 本頁專屬主題變數（供卡片/陰影使用）--- */
-  :root{
-    --primary:#00993d; --accent:#e303a4;
-    --radius:14px; --shadow:0 2px 10px rgba(0,0,0,.12);
-  }
-
-  /* --- Reset 與基礎排版（避免與共用 topbar 重複，僅保留必要） --- */
-  *{box-sizing:border-box;margin:0;padding:0}
-  html, body { height:100%; }
-  body{
-    min-height:100svh; display:flex; flex-direction:column;
-    font-family:'Noto Sans TC',sans-serif; color:#222; background:#fff;
-  }
-  main{ flex:1; }
-  a{ color:inherit; text-decoration:none; }
-
-  /* =========================
-    Hero 輪播
-  ========================== */
-  .hero-wrap{max-width:1200px;margin:20px auto;padding:0 16px}
-  .carousel{
-    position:relative; overflow:hidden; border-radius:20px; box-shadow:0 12px 30px rgba(0,0,0,.12);
-    aspect-ratio:16/7.95; background:#ddd; /* 改照片上下寬度 */
-  }
-  .slide{position:absolute; inset:0; opacity:0; transition:opacity .6s ease}
-  .slide img{width:100%; height:100%; object-fit:cover; display:block}
-  .slide.active{opacity:1}
-  .slide .label{
-    position:absolute; top:14px; left:14px;
-    background:rgba(255,255,255,.95); color:#17583a; border:1px solid rgba(0,0,0,.08);
-    padding:6px 10px; border-radius:999px; font-weight:700; font-size:.92rem;
-  }
-  .slide .caption{
-    position:absolute; left:0; right:0; bottom:0;
-    background:linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.5) 70%);
-    color:#fff; padding:30px 18px 16px; font-size:1rem; line-height:1.5;
-  }
-  .ctrl{
-    position:absolute; top:50%; transform:translateY(-50%);
-    background:rgba(0,0,0,.45); color:#fff; border:none; width:44px; height:44px; border-radius:50%;
-    display:grid; place-items:center; cursor:pointer;
-  }
-  .ctrl:hover{background:rgba(0,0,0,.65)}
-  .ctrl.prev{left:12px} .ctrl.next{right:12px}
-  .dots{position:absolute; left:0; right:0; bottom:10px; display:flex; justify-content:center; gap:8px}
-  .dot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.6);border:1px solid rgba(0,0,0,.2);cursor:pointer}
-  .dot.active{background:#fff}
-
-  /* =========================
-    最新公告（桌機 3 欄；手機 1 欄）
-  ========================== */
-  .section{max-width:1200px;margin:20px auto;padding:0 16px}
-  .bulletin h2{margin:4px 0 12px;color:#165a2e}
-  .bgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-
-  /* 卡片 */
-  .news{
-    display:block; background:#fff; border-radius:12px;
-    box-shadow:var(--shadow); padding:14px 16px; color:inherit;
-  }
-  a.news{ transition:transform .15s ease, box-shadow .15s ease, background .15s ease; cursor:pointer; }
-  a.news:hover{ transform:translateY(-2px); box-shadow:0 10px 24px rgba(0,0,0,.18); }
-  a.news:active{ transform:translateY(-1px) scale(.998); }
-  a.news:focus-visible{ outline:3px solid #1b5e3a; outline-offset:2px; }
-  .news.is-static{ cursor:default; }
-
-  .badge{display:inline-block;background:#eaf8ef;color:#0a7a36;border:1px solid #bfe7cc;border-radius:999px;padding:3px 8px;font-size:.82rem;margin-bottom:6px}
-  .news .title{ font-weight:700; color:#1b5e3a; }
-  .news .desc{ font-size:.9rem; color:#444; line-height:1.5; margin-top:6px; }
-  .meta{font-size:.86rem;color:#666;margin-top:4px}
-
-  /* 最新公告下方的小提示文案 */
-  .bulletin .bulletin-tip{
-    font-size:.95rem;
-    color:#555;
-    line-height:1.6;
-    margin: -2px 0 10px;  /* 與標題、控制列的間距 */
-  }
-
-  /* === Bulletin 控制列（搜尋 + 篩選） === */
-  .bulletin .controls{
-    display:flex; gap:12px; align-items:center; margin:10px 0 14px;
-    flex-wrap:wrap;
-  }
-  .bulletin .search-wrap{
-    position:relative; flex:1 1 420px; max-width:720px;
-  }
-  .bulletin .search-wrap input{
-    width:100%; font-size:16px; padding:12px 16px 12px 44px;
-    border:1px solid #ddd; border-radius:12px; outline:none;
-    box-shadow:0 2px 8px rgba(0,0,0,.06) inset; transition:border .2s ease;
-  }
-  .bulletin .search-wrap input:focus{ border-color:#00993d; }
-  .bulletin .search-wrap .icon{
-    position:absolute; left:14px; top:50%; transform:translateY(-50%);
-    pointer-events:none; font-size:18px;
-  }
-  .bulletin .filter{
-    min-width:110px; font-size:16px; padding:10px 12px;
-    border:1px solid #111; border-radius:12px; background:#fff; cursor:pointer;
-  }
-
-  /* 卡片縮圖容器：暗暗的圖片 + 中央浮層按鈕 */
-    .thumb-wrap{
-    position: relative;
-    width: 100%;
-    aspect-ratio: 16/9;     /* 可改 4/3 或 1/1 */
-    border-radius: 10px;
-    overflow: hidden;
-    margin: 10px 0;
-    }
-    .thumb-wrap img{
-    width: 100%; height: 100%;
-    object-fit: cover;
-    display: block;
-    filter: brightness(70%);        /* 圖片預設變暗 */
-    }
-
-    /* 永遠顯示的黑色半透明遮罩 */
-    .thumb-overlay{
-    position: absolute;
-    inset: 0;
-    display: flex; align-items: center; justify-content: center;
-    background: rgba(0,0,0,.4);     /* 半透明黑底 */
-    }
-
-    /* 中央按鈕 */
-    .thumb-overlay button{
-    background: #00993d;
-    border: none; border-radius: 8px;
-    padding: 10px 16px;
-    font-size: 16px; font-weight: 700; color: #fff;
-    cursor: pointer;
-    box-shadow: 0 6px 16px rgba(0,0,0,.35);
-    }
-    .thumb-overlay button:hover{ background:#007a31; }
-
-    /* 卡片基本間距（可留原本的） */
-    .news{ padding-top: 12px; }
-
-    /* 🔍 燈箱（放大檢視） */
-    .lightbox{
-    position: fixed; inset: 0; z-index: 9999;
-    background: rgba(0,0,0,.72);
-    display: none; align-items: center; justify-content: center;
-    padding: 16px;
-    }
-    .lightbox.open{ display: flex; }
-    .lightbox img{
-    max-width: min(1024px, 92vw);
-    max-height: 90vh;
-    width: auto; height: auto;
-    border-radius: 10px;
-    box-shadow: 0 10px 30px rgba(0,0,0,.5);
-    }
-    .lightbox .close{
-    position:absolute; top:12px; right:12px;
-    background: rgba(255,255,255,.9);
-    border:none; border-radius:999px;
-    width:40px; height:40px; cursor:pointer; font-size:22px;
-    }
-
-  /* === 分頁 === */
-  .pager{
-    display:flex; gap:10px; align-items:center; justify-content:center;
-    margin:20px 0 6px;
-  }
-  .page-btn, .page-nav{
-    display:inline-grid; place-items:center; min-width:44px; height:44px;
-    padding:0 12px; border-radius:6px; background:#cc0092; color:#fff; cursor:pointer;
-    border:none; font-size:16px; user-select:none;
-  }
-  .page-num{
-    display:inline-grid; place-items:center; min-width:36px; height:36px;
-    font-size:16px; padding:0 8px; border-radius:6px; cursor:pointer; border:1px solid transparent;
-  }
-  .page-num.active{ background:#cc0092; color:#fff; }
-  .page-num:hover{ border-color:#cc0092; }
-  .pager .ellipsis{ padding:0 4px; color:#666; }
-
-  /* 特別標示需報名 */
-  .badge[data-cat="需預約"] {
-    background: #fff3cd;   /* 淺黃底 */
-    color: #856404;        /* 深黃色文字 */
-    border: 1px solid #ffeeba;
-  }
-
-  /* 特別標示不需報名 */
-  .badge[data-cat="不需報名"] {
-    background: #e2e3e5;   /* 淺灰底 */
-    color: #383d41;        /* 深灰文字 */
-    border: 1px solid #d6d8db;
-  }
-
-  /* =========================
-    Footer
-  ========================== */
-  footer{
-    background:#333;color:#fff;text-align:center;padding:16px;
-    line-height:1.6;font-size:.95em; margin-top:auto;
-  }
-
-  /* =========================
-    手機樣式（≤900px）：
-    - 公告 1 欄
-  ========================== */
-  @media (max-width:900px){
-    .bgrid{ grid-template-columns:1fr; }
-    .page-btn{ min-width:40px; height:40px; }
-    .page-num{ min-width:32px; height:32px; }
-  }
+  html, body { height: 100%; margin: 0; padding: 0; }
+  body { min-height: 100svh; display: flex; flex-direction: column; }
+  main { flex: 1; }
   </style>
 </head>
 <body>
@@ -262,568 +53,222 @@
   <div id="topbar-mount"></div>
 
   <main>
-    <!-- =========================
-      Hero 輪播
-    ========================== -->
-    <section class="hero-wrap" aria-label="重點照片">
-      <div class="carousel" id="carousel">
-        <div class="slide active">
+    <!-- Hero 輪播 + CTA -->
+    <section class="hero-section container reveal" aria-label="重點照片">
+      <div class="hero-carousel" id="carousel">
+        <div class="hero-slide slide active">
           <img src="images/slide1.jpg" alt="服務處外觀">
-          <span class="label">陳雅惠議員</span>
-          <div class="caption">傾聽每一個聲音，守護在地的每一天。</div>
+          <div class="hero-overlay"></div>
+          <div class="hero-content">
+            <span class="hero-label"><i data-lucide="heart-handshake" style="width:16px;height:16px"></i> 陳雅惠議員</span>
+            <h1 class="hero-title">傾聽每一個聲音，守護在地的每一天</h1>
+            <p class="hero-caption">為民服務、政策參與、進度透明——您的聲音，我們認真對待。</p>
+            <div class="hero-cta">
+              <a href="contact.html" class="btn btn-primary btn-sm">
+                立即陳情 <i data-lucide="arrow-right" class="btn-icon" style="width:16px;height:16px"></i>
+              </a>
+              <a href="announcements.html" class="btn btn-glass btn-sm">最新公告</a>
+              <a href="about.html" class="btn btn-glass btn-sm">了解雅惠議員</a>
+            </div>
+          </div>
         </div>
-        <div class="slide">
+        <div class="hero-slide slide">
           <img src="images/slide2.jpg" alt="議會質詢片段">
-          <span class="label">議會質詢片段</span>
-          <div class="caption">針對民生、交通、教育等議題積極監督與建言，爭取在地建設。</div>
+          <div class="hero-overlay"></div>
+          <div class="hero-content">
+            <span class="hero-label"><i data-lucide="landmark" style="width:16px;height:16px"></i> 議會質詢</span>
+            <h1 class="hero-title">積極監督與建言，爭取在地建設</h1>
+            <p class="hero-caption">針對民生、交通、教育等議題，在議會為民發聲。</p>
+            <div class="hero-cta">
+              <a href="contact.html" class="btn btn-primary btn-sm">立即陳情</a>
+              <a href="news.html" class="btn btn-glass btn-sm">相關新聞</a>
+              <a href="about.html" class="btn btn-glass btn-sm">了解雅惠議員</a>
+            </div>
+          </div>
         </div>
-        <div class="slide">
+        <div class="hero-slide slide">
           <img src="images/slide3.jpg" alt="里內活動合照">
-          <span class="label">社區活動</span>
-          <div class="caption">與里民一起參與環境清潔、關懷長者等活動，連結社區向心力。</div>
+          <div class="hero-overlay"></div>
+          <div class="hero-content">
+            <span class="hero-label"><i data-lucide="users" style="width:16px;height:16px"></i> 社區活動</span>
+            <h1 class="hero-title">與里民同行，連結社區向心力</h1>
+            <p class="hero-caption">環境清潔、關懷長者——我們一直在您身邊。</p>
+            <div class="hero-cta">
+              <a href="announcements.html" class="btn btn-primary btn-sm">最新公告</a>
+              <a href="about.html" class="btn btn-glass btn-sm">了解雅惠議員</a>
+            </div>
+          </div>
         </div>
 
-        <button class="ctrl prev" aria-label="上一張" id="prev">&#10094;</button>
-        <button class="ctrl next" aria-label="下一張" id="next">&#10095;</button>
-        <div class="dots" id="dots"></div>
+        <button class="hero-ctrl ctrl prev" aria-label="上一張" id="prev">&#10094;</button>
+        <button class="hero-ctrl ctrl next" aria-label="下一張" id="next">&#10095;</button>
+        <div class="hero-dots dots" id="dots"></div>
       </div>
     </section>
 
-    <!-- 📦 載入公告資料（你的檔案） -->
-    <script src="shared/news-data.js"></script>
-
-    <!-- =========================
-    服務處公告（已加入搜尋、分類、分頁）
-    ========================== -->
-    <section class="section bulletin" id="service">
-      <h2>📣 服務處公告</h2>
-
-      <!-- 說明文（放在 h2 下面、controls 上面） -->
-       <p class="bulletin-tip">
-        🔍 可輸入關鍵字（如：法律、中秋），並搭配分類選單（如：需預約、不需報名）快速查詢相關資訊。
-       </p>
-
-      <!-- 控制列：搜尋 + 分類 -->
-      <div class="controls" aria-label="服務處搜尋與分類">
-        <div class="search-wrap">
-          <span class="icon">🔍</span>
-          <input id="service-search" type="search" placeholder="輸入關鍵字查詢" aria-label="輸入關鍵字查詢">
+    <!-- 議員介紹 -->
+    <section class="section container reveal" id="about-preview">
+      <div class="about-preview">
+        <img src="headshot.jpg" alt="陳雅惠議員照片" class="about-preview-photo">
+        <div class="about-preview-text">
+          <h3>陳雅惠議員</h3>
+          <p>從地方服務到議會監督，我一直都在市民的第一線傾聽與努力。無論是學校旁的紅綠燈、巷子裡的排水問題，還是弱勢家庭的照顧，我都認真看待每一個聲音。</p>
+          <p><strong>我相信：真正的改變，是從每一次傾聽開始。</strong></p>
+          <a href="about.html" class="btn btn-primary btn-sm">
+            了解更多 <i data-lucide="arrow-right" class="btn-icon" style="width:16px;height:16px"></i>
+          </a>
         </div>
-        <select id="service-filter" class="filter" aria-label="分類篩選">
-          <option value="全部" selected>全部</option>
-          <option value="需預約">需預約</option>
-          <option value="不需報名">不需報名</option>
-          <option value="其他">其他</option>
-          <!-- 需要更多分類就自行加 option -->
-        </select>
       </div>
-
-      <!-- 卡片清單（請為每張卡片加上 data-category，逗號分隔可多分類） -->
-      <div class="bgrid" id="service-list"></div>
-      <!-- 分頁列 -->
-      <nav class="pager" id="service-pager" aria-label="公告分頁"></nav>
     </section>
-    
 
-    <!-- =========================
-      相關新聞（已加入搜尋、分類、分頁）
-    ========================== -->
-    <section class="section bulletin" id="bulletin">
-      <h2>📰 相關新聞</h2>
-
-      <!-- 說明文（放在 h2 下面、controls 上面） -->
-       <p class="bulletin-tip">
-        🔍 可輸入關鍵字（如：公托、颱風），並搭配分類選單（如：教育、公共安全）快速查詢相關資訊。
-       </p>
-
-      <!-- 控制列：搜尋 + 分類 -->
-      <div class="controls" aria-label="公告搜尋與分類">
-        <div class="search-wrap">
-          <span class="icon">🔍</span>
-          <input id="bulletin-search" type="search" placeholder="輸入關鍵字查詢" aria-label="輸入關鍵字查詢">
-        </div>
-        <select id="bulletin-filter" class="filter" aria-label="分類篩選">
-          <option value="全部" selected>全部</option>
-          <option value="在地活動">在地活動</option>
-          <option value="議會 / 政策">議會(質詢) / 政策</option>
-          <option value="民生">民生</option>
-          <option value="交通">交通</option>
-          <option value="在地建設">在地建設</option>
-          <option value="教育">教育</option>
-          <option value="公共安全">公共安全（自然災害、防疫、治安...）</option>
-          <option value="政治參與">政治參與</option>
-          <option value="其他">其他</option>
-          <!-- 需要更多分類就自行加 option -->
-        </select>
+    <!-- 熱門服務 -->
+    <section class="section container reveal" id="services">
+      <div class="section-header">
+        <h2><span class="section-icon"><i data-lucide="layout-grid" style="width:20px;height:20px"></i></span> 熱門服務</h2>
+        <p>選擇您需要的服務，我們隨時為您效勞</p>
       </div>
+      <div class="grid-3">
+        <a href="contact.html" class="service-card">
+          <div class="service-icon"><i data-lucide="mail" style="width:28px;height:28px"></i></div>
+          <h3>線上陳情</h3>
+          <p>反映民生、交通、環境等問題，我們將盡快處理</p>
+          <span class="btn btn-secondary btn-sm">前往陳情</span>
+        </a>
+        <a href="track.html" class="service-card">
+          <div class="service-icon"><i data-lucide="search" style="width:28px;height:28px"></i></div>
+          <h3>進度查詢</h3>
+          <p>輸入案件編號，即時掌握陳情處理進度</p>
+          <span class="btn btn-secondary btn-sm">查詢進度</span>
+        </a>
+        <a href="legal-time.html" class="service-card">
+          <div class="service-icon"><i data-lucide="scale" style="width:28px;height:28px"></i></div>
+          <h3>法律諮詢</h3>
+          <p>免費初步法律諮詢，協助您釐清權益</p>
+          <span class="btn btn-secondary btn-sm">預約諮詢</span>
+        </a>
+      </div>
+    </section>
 
-      <!-- 卡片清單（請為每張卡片加上 data-category，逗號分隔可多分類） -->
-      <div class="bgrid" id="bulletin-list"></div>
-      
-      <!-- 分頁列 -->
-      <nav class="pager" id="bulletin-pager" aria-label="公告分頁"></nav>
+    <!-- 服務特色 -->
+    <section class="section container reveal" id="features">
+      <div class="section-header">
+        <h2><span class="section-icon"><i data-lucide="sparkles" style="width:20px;height:20px"></i></span> 服務特色</h2>
+        <p>一站式民意交流平台，讓您的需求被聽見、被處理、被追蹤</p>
+      </div>
+      <div class="grid-4">
+        <div class="feature-card">
+          <div class="feature-icon"><i data-lucide="zap" style="width:26px;height:26px"></i></div>
+          <h3>快速回應</h3>
+          <p>線上陳情即時受理，服務團隊盡快處理您的需求</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><i data-lucide="eye" style="width:26px;height:26px"></i></div>
+          <h3>進度透明</h3>
+          <p>隨時查詢案件處理進度，掌握每一個環節</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><i data-lucide="scale" style="width:26px;height:26px"></i></div>
+          <h3>法律諮詢</h3>
+          <p>免費初步法律諮詢，協助釐清權益與對策</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><i data-lucide="megaphone" style="width:26px;height:26px"></i></div>
+          <h3>政策參與</h3>
+          <p>歡迎提出政見建議，讓民意進入議會討論</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 法律諮詢 CTA -->
+    <section class="section container reveal" id="legal-cta">
+      <div class="cta-banner">
+        <h3>需要法律協助？</h3>
+        <p>我們提供免費初步法律諮詢，協助您釐清權益與對策。歡迎透過官方 LINE 預約。</p>
+        <a href="legal-time.html" class="btn btn-glass">
+          查看諮詢時間 <i data-lucide="arrow-right" class="btn-icon" style="width:16px;height:16px"></i>
+        </a>
+      </div>
     </section>
   </main>
 
-  <footer>
-    &copy; 陳雅惠議員服務團隊<br>
-    服務處地址：台中市南區正義街236號<br>
-    聯絡電話：04-2282-4639
-  </footer>
+  <div id="footer-mount"></div>
 
-  <!-- ✅ 自動載入 shared/topbar.html + topbar.js；會注入導覽列並啟用手機抽屜 -->
-  <script>
-    (function () {
-      const mountId = 'topbar-mount';
-      const prefixes = ['shared/', './shared/', '../shared/', '/shared/'];
-      async function tryLoad() {
-        for (const p of prefixes) {
-          try {
-            const res = await fetch(p + 'topbar.html', { cache: 'no-store' });
-            if (!res.ok) continue;
-            const html = await res.text();
-            const mount = document.getElementById(mountId);
-            if (!mount) return;
-            mount.outerHTML = html;
-            const s = document.createElement('script');
-            s.src = p + 'topbar.js';
-            document.body.appendChild(s);
-            if (!document.querySelector('link[href*="topbar.css"]')) {
-              const link = document.createElement('link');
-              link.rel = 'stylesheet';
-              link.href = p + 'topbar.css';
-              document.head.appendChild(link);
-            }
-            return;
-          } catch (e) {}
-        }
-        const mount = document.getElementById(mountId);
-        if (mount) {
-          mount.innerHTML =
-            '<div style="background:#fee;border:1px solid #f99;color:#900;padding:10px;border-radius:8px;">' +
-            '無法載入 <code>shared/topbar.html</code>。請確認：<br>' +
-            '1) 以伺服器方式開啟（Live Server / localhost）<br>' +
-            '2) 此頁相對於 <code>/shared</code> 的路徑層級是否正確' +
-            '</div>';
-        }
-      }
-      tryLoad();
-    })();
-  </script>
+  <!-- 自動載入 topbar -->
+  <script src="shared/topbar-loader.js"></script>
 
   <!-- Hero 輪播腳本 -->
   <script>
-    (function(){
+    (function () {
       const root = document.getElementById('carousel');
+      if (!root) return;
+
       const slides = Array.from(root.querySelectorAll('.slide'));
       const prev = root.querySelector('#prev');
       const next = root.querySelector('#next');
       const dotsEl = root.querySelector('#dots');
-      let i=0, timer;
+      const INTERVAL = 2500;
+      let i = 0;
+      let timer = null;
+      let paused = false;
 
-      function go(n){
-        slides[i].classList.remove('active'); dotsEl.children[i]?.classList.remove('active');
-        i=(n+slides.length)%slides.length;
-        slides[i].classList.add('active'); dotsEl.children[i]?.classList.add('active');
+      function go(n) {
+        slides[i].classList.remove('active');
+        dotsEl.children[i]?.classList.remove('active');
+        i = (n + slides.length) % slides.length;
+        slides[i].classList.add('active');
+        dotsEl.children[i]?.classList.add('active');
       }
-      function auto(){ timer=setInterval(()=>go(i+1),5000); }
-      function stop(){ clearInterval(timer); }
 
-      slides.forEach((_,idx)=>{
-        const d=document.createElement('button');
-        d.className='dot'+(idx===0?' active':'');
-        d.addEventListener('click',()=>{stop();go(idx);auto();});
+      function stop() {
+        clearTimeout(timer);
+        timer = null;
+      }
+
+      function scheduleNext() {
+        stop();
+        if (paused) return;
+        timer = setTimeout(function () {
+          go(i + 1);
+          scheduleNext();
+        }, INTERVAL);
+      }
+
+      function navigate(n) {
+        go(n);
+        scheduleNext();
+      }
+
+      slides.forEach(function (_, idx) {
+        const d = document.createElement('button');
+        d.className = 'hero-dot dot' + (idx === 0 ? ' active' : '');
+        d.addEventListener('click', function () { navigate(idx); });
         dotsEl.appendChild(d);
       });
-      prev.addEventListener('click',()=>{stop();go(i-1);auto();});
-      next.addEventListener('click',()=>{stop();go(i+1);auto();});
-      root.addEventListener('mouseenter',stop);
-      root.addEventListener('mouseleave',auto);
-      auto();
+
+      prev.addEventListener('click', function () { navigate(i - 1); });
+      next.addEventListener('click', function () { navigate(i + 1); });
+
+      root.addEventListener('mouseenter', function () {
+        paused = true;
+        stop();
+      });
+      root.addEventListener('mouseleave', function () {
+        paused = false;
+        scheduleNext();
+      });
+
+      document.addEventListener('visibilitychange', function () {
+        if (document.hidden) {
+          stop();
+        } else if (!paused) {
+          scheduleNext();
+        }
+      });
+
+      scheduleNext();
     })();
   </script>
 
-
-<!-- 📣 服務處公告：搜尋 + 分類 + 分頁（改為資料驅動，只渲染當頁 6 則） -->
-<script>
-(function(){
-  const PER_PAGE = 3;  // 每頁 3 則（可調）
-  const data = Array.isArray(window.SERVICE_DATA) ? window.SERVICE_DATA : []; // 來源：news-data.js
-
-  const list   = document.getElementById('service-list');
-  const search = document.getElementById('service-search');
-  const filter = document.getElementById('service-filter');
-  const pager  = document.getElementById('service-pager');
-  const anchorTop = () => document.getElementById('service').offsetTop - 80;
-
-  // 先清空容器（改由程式動態產生卡片）
-  list.innerHTML = '';
-
-  // 小工具
-  const debounce = (fn, ms=150) => { let t; return (...args)=>{ clearTimeout(t); t=setTimeout(()=>fn(...args), ms); }; };
-  const norm = s => (s||'').toLowerCase().trim();
-
-  // 狀態（用索引避免複製資料）
-  let view = { q:'', cat:'全部', page:1, idx:[...Array(data.length).keys()] };
-
-  // 依搜尋與分類重算「符合條件的索引」
-  function applyFilters(){
-    const q = norm(view.q);
-    const cat = view.cat;
-    view.idx = data
-      .map((_,i)=>i)
-      .filter(i => {
-        const it = data[i];
-        const hay = norm((it.title||'') + ' ' + (it.desc||'') + ' ' + (it.categories||[]).join(' '));
-        const okQ   = q ? hay.includes(q) : true;
-        const okCat = (cat === '全部') ? true : (it.categories||[]).includes(cat);
-        return okQ && okCat;
-      });
-    view.page = 1;
-    render();
-  }
-
-  // 只渲染當頁需要的卡片
-  function render(){
-    const total = view.idx.length;
-    const pages = Math.max(1, Math.ceil(total / PER_PAGE));
-    view.page = Math.min(view.page, pages);
-
-    const start = (view.page - 1) * PER_PAGE;
-    const end   = Math.min(start + PER_PAGE, total);
-    const pageIdx = view.idx.slice(start, end);
-
-    list.innerHTML = '';
-    const frag = document.createDocumentFragment();
-    pageIdx.forEach(i => frag.appendChild(renderCard(data[i])));
-    list.appendChild(frag);
-
-    drawPager(pages);
-  }
-
-  // 產生單張卡片（有 href → <a>；無 → <div class="news is-static">）
-  function renderCard(item){
-    const hasLink = !!item.href;
-    const el = document.createElement(hasLink ? 'a' : 'div');
-    el.className = 'news' + (hasLink ? '' : ' is-static');
-    if (hasLink){
-      el.href = item.href;
-      el.target = '_blank';
-      el.rel = 'noopener noreferrer';
-    }
-
-    // 類別徽章（可多個）
-    (item.categories||[]).forEach(cat => {
-      const b = document.createElement('span');
-      b.className = 'badge';
-      b.textContent = cat;
-
-      // ⭐ 新增這行：把類別文字存進 data-cat
-      b.setAttribute('data-cat', cat);
-
-      el.appendChild(b);
-    });
-
-    // 標題
-    const t = document.createElement('div');
-    t.className = 'title';
-    t.textContent = item.title || '';
-    el.appendChild(t);
-    el.appendChild(document.createElement('br'));
-
-    // 描述（可選）
-    if (item.desc){
-      const d = document.createElement('div');
-      d.className = 'desc';
-      d.innerHTML = (item.desc || '').replace(/\n/g, '<br>');  // 👈 支援 <br> 也支援 \n
-      el.appendChild(d);
-      el.appendChild(document.createElement('br'));
-    }
-
-    if (item.img){
-    const wrap = document.createElement('div');
-    wrap.className = 'thumb-wrap';
-
-    const img = document.createElement('img');
-    img.src = item.img;
-    img.alt = item.title || '公告圖片';
-    img.loading = 'lazy';
-    wrap.appendChild(img);
-
-    // 🆕 加一個遮罩 + 按鈕
-    const overlay = document.createElement('div');
-    overlay.className = 'thumb-overlay';
-    const btn = document.createElement('button');
-    btn.textContent = '點我放大';
-    overlay.appendChild(btn);
-    wrap.appendChild(overlay);
-
-    // 點按鈕才開燈箱
-    btn.addEventListener('click', (ev)=>{
-        ev.preventDefault();
-        openLightbox(item.img, item.title || '公告圖片');
-    });
-
-    el.appendChild(wrap);
-    }
-
-    // meta：日期 · 來源（保留你原本寫法）
-    const m = document.createElement('div');
-    m.className = 'meta';
-    m.textContent = [item.date, item.source].filter(Boolean).join(' · ');
-    el.appendChild(m);
-
-    return el;
-  }
-
-  // 分頁器
-  function pageBtn(label, className, disabled, onClick){
-    const b = document.createElement('button');
-    b.className = className;
-    b.textContent = label;
-    b.disabled = !!disabled;
-    if (!disabled) b.addEventListener('click', onClick);
-    return b;
-  }
-  function pageNum(num, current){
-    const btn = document.createElement('button');
-    btn.className = 'page-num' + (num === current ? ' active' : '');
-    btn.textContent = num;
-    btn.addEventListener('click', () => { view.page = num; render(); window.scrollTo({top:anchorTop(), behavior:'smooth'}); });
-    return btn;
-  }
-  function drawPager(pages){
-    pager.innerHTML = '';
-    if (pages <= 1) return;
-
-    pager.appendChild(pageBtn('上一頁', 'page-btn page-prev', view.page===1, () => {
-      view.page--; render(); window.scrollTo({top:anchorTop(), behavior:'smooth'});
-    }));
-
-    // 只顯示：1、目前頁±1、最後頁；中間用 …
-    const cur = view.page;
-    const want = new Set([1, cur-1, cur, cur+1, pages]);
-    const nums = [...Array(pages)].map((_,i)=>i+1).filter(n => want.has(n) && n>=1 && n<=pages);
-    let last = 0;
-    nums.forEach(n => {
-      if (n - last > 1){
-        const ell = document.createElement('span');
-        ell.className = 'ellipsis';
-        ell.textContent = '…';
-        pager.appendChild(ell);
-      }
-      pager.appendChild(pageNum(n, cur));
-      last = n;
-    });
-
-    pager.appendChild(pageBtn('下一頁', 'page-btn page-next', view.page===pages, () => {
-      view.page++; render(); window.scrollTo({top:anchorTop(), behavior:'smooth'});
-    }));
-  }
-
-  // 綁事件（搜尋加 debounce、分類即時）
-  search.addEventListener('input', debounce(e => { view.q = e.target.value; applyFilters(); }, 150));
-  filter.addEventListener('change', e => { view.cat = e.target.value; applyFilters(); });
-
-  // 初始化
-  applyFilters(); // 會呼叫 render()
-})();
-</script>
-
-
-
-<!-- 📰 相關新聞：搜尋 + 分類 + 分頁（改為資料驅動，只渲染當頁 6 則） -->
-<script>
-(function(){
-  const PER_PAGE = 6;  // 每頁 6 則（可調）
-  const data = Array.isArray(window.NEWS_DATA) ? window.NEWS_DATA : []; // 來源：news-data.js
-
-  const list   = document.getElementById('bulletin-list');
-  const search = document.getElementById('bulletin-search');
-  const filter = document.getElementById('bulletin-filter');
-  const pager  = document.getElementById('bulletin-pager');
-  const anchorTop = () => document.getElementById('bulletin').offsetTop - 80;
-
-  // 先清空容器（改由程式動態產生卡片）
-  list.innerHTML = '';
-
-  // 小工具
-  const debounce = (fn, ms=150) => { let t; return (...args)=>{ clearTimeout(t); t=setTimeout(()=>fn(...args), ms); }; };
-  const norm = s => (s||'').toLowerCase().trim();
-
-  // 狀態（用索引避免複製資料）
-  let view = { q:'', cat:'全部', page:1, idx:[...Array(data.length).keys()] };
-
-  // 依搜尋與分類重算「符合條件的索引」
-  function applyFilters(){
-    const q = norm(view.q);
-    const cat = view.cat;
-    view.idx = data
-      .map((_,i)=>i)
-      .filter(i => {
-        const it = data[i];
-        const hay = norm((it.title||'') + ' ' + (it.desc||'') + ' ' + (it.categories||[]).join(' '));
-        const okQ   = q ? hay.includes(q) : true;
-        const okCat = (cat === '全部') ? true : (it.categories||[]).includes(cat);
-        return okQ && okCat;
-      });
-    view.page = 1;
-    render();
-  }
-
-  // 只渲染當頁需要的卡片
-  function render(){
-    const total = view.idx.length;
-    const pages = Math.max(1, Math.ceil(total / PER_PAGE));
-    view.page = Math.min(view.page, pages);
-
-    const start = (view.page - 1) * PER_PAGE;
-    const end   = Math.min(start + PER_PAGE, total);
-    const pageIdx = view.idx.slice(start, end);
-
-    list.innerHTML = '';
-    const frag = document.createDocumentFragment();
-    pageIdx.forEach(i => frag.appendChild(renderCard(data[i])));
-    list.appendChild(frag);
-
-    drawPager(pages);
-  }
-
-  // 產生單張卡片（有 href → <a>；無 → <div class="news is-static">）
-  function renderCard(item){
-    const hasLink = !!item.href;
-    const el = document.createElement(hasLink ? 'a' : 'div');
-    el.className = 'news' + (hasLink ? '' : ' is-static');
-    if (hasLink){
-      el.href = item.href;
-      el.target = '_blank';
-      el.rel = 'noopener noreferrer';
-    }
-
-    // 類別徽章（可多個）
-    (item.categories||[]).forEach(cat => {
-      const b = document.createElement('span');
-      b.className = 'badge';
-      b.textContent = cat;
-      el.appendChild(b);
-    });
-
-    // 標題
-    const t = document.createElement('div');
-    t.className = 'title';
-    t.textContent = item.title || '';
-    el.appendChild(t);
-    el.appendChild(document.createElement('br'));
-
-    // 描述（可選）
-    if (item.desc){
-      const d = document.createElement('div');
-      d.className = 'desc';
-      d.innerHTML = (item.desc || '').replace(/\n/g, '<br>');  // 👈 支援 <br> 也支援 \n
-      el.appendChild(d);
-      el.appendChild(document.createElement('br'));
-    }
-
-    // meta：日期 · 來源（保留你原本寫法）
-    const m = document.createElement('div');
-    m.className = 'meta';
-    m.textContent = [item.date, item.source].filter(Boolean).join(' · ');
-    el.appendChild(m);
-
-    return el;
-  }
-
-  // 分頁器
-  function pageBtn(label, className, disabled, onClick){
-    const b = document.createElement('button');
-    b.className = className;
-    b.textContent = label;
-    b.disabled = !!disabled;
-    if (!disabled) b.addEventListener('click', onClick);
-    return b;
-  }
-  function pageNum(num, current){
-    const btn = document.createElement('button');
-    btn.className = 'page-num' + (num === current ? ' active' : '');
-    btn.textContent = num;
-    btn.addEventListener('click', () => { view.page = num; render(); window.scrollTo({top:anchorTop(), behavior:'smooth'}); });
-    return btn;
-  }
-  function drawPager(pages){
-    pager.innerHTML = '';
-    if (pages <= 1) return;
-
-    pager.appendChild(pageBtn('上一頁', 'page-btn page-prev', view.page===1, () => {
-      view.page--; render(); window.scrollTo({top:anchorTop(), behavior:'smooth'});
-    }));
-
-    // 只顯示：1、目前頁±1、最後頁；中間用 …
-    const cur = view.page;
-    const want = new Set([1, cur-1, cur, cur+1, pages]);
-    const nums = [...Array(pages)].map((_,i)=>i+1).filter(n => want.has(n) && n>=1 && n<=pages);
-    let last = 0;
-    nums.forEach(n => {
-      if (n - last > 1){
-        const ell = document.createElement('span');
-        ell.className = 'ellipsis';
-        ell.textContent = '…';
-        pager.appendChild(ell);
-      }
-      pager.appendChild(pageNum(n, cur));
-      last = n;
-    });
-
-    pager.appendChild(pageBtn('下一頁', 'page-btn page-next', view.page===pages, () => {
-      view.page++; render(); window.scrollTo({top:anchorTop(), behavior:'smooth'});
-    }));
-  }
-
-  // 綁事件（搜尋加 debounce、分類即時）
-  search.addEventListener('input', debounce(e => { view.q = e.target.value; applyFilters(); }, 150));
-  filter.addEventListener('change', e => { view.cat = e.target.value; applyFilters(); });
-
-  // 初始化
-  applyFilters(); // 會呼叫 render()
-})();
-</script>
-
-<div id="lightbox" class="lightbox" aria-modal="true" role="dialog">
-  <button class="close" aria-label="關閉">✕</button>
-  <img alt="公告圖片預覽">
-</div>
-
-<script>
-(function(){
-  const box = document.getElementById('lightbox');
-  if(!box) return;
-  const img = box.querySelector('img');
-  const closeBtn = box.querySelector('.close');
-
-  window.openLightbox = (src, alt='')=>{
-    img.src = src; img.alt = alt;
-    box.classList.add('open');
-
-    const onKey = (e)=>{ if(e.key==='Escape') hide(); };
-    const onBg  = (e)=>{ if(e.target===box) hide(); };
-
-    function hide(){
-      box.classList.remove('open');
-      img.src = '';
-      document.removeEventListener('keydown', onKey);
-      closeBtn.removeEventListener('click', hide);
-      box.removeEventListener('click', onBg);
-    }
-
-    document.addEventListener('keydown', onKey);
-    closeBtn.addEventListener('click', hide);
-    box.addEventListener('click', onBg);
-  };
-})();
-</script>
-
 </body>
 </html>
-
-
-
 
