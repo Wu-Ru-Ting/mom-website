@@ -21,13 +21,48 @@
     }
     .search-bar { display: flex; gap: 12px; align-items: center; margin: 0 0 30px; flex-wrap: wrap; justify-content: center; }
     .faq-box {
-      border: 1px solid var(--border); padding: 20px;
-      border-radius: var(--radius-md); margin-bottom: 20px;
-      background: var(--bg); transition: box-shadow var(--transition), transform var(--transition);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      margin-bottom: 12px;
+      background: var(--bg);
+      overflow: hidden;
+      transition: box-shadow var(--transition), border-color var(--transition);
     }
-    .faq-box:hover { box-shadow: var(--shadow-sm); transform: translateY(-2px); }
-    .faq-question { color: var(--primary-dark); font-weight: 700; margin-bottom: 10px; font-size: 1.05em; }
-    .faq-answer { color: #444; line-height: 1.7; }
+    .faq-box[open] {
+      box-shadow: var(--shadow-sm);
+      border-color: rgba(0, 153, 61, 0.25);
+    }
+    .faq-question {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 18px 20px;
+      color: var(--primary-dark);
+      font-weight: 700;
+      font-size: 1.05em;
+      cursor: pointer;
+      list-style: none;
+      user-select: none;
+    }
+    .faq-question::-webkit-details-marker { display: none; }
+    .faq-question::marker { content: ''; }
+    .faq-question span { flex: 1; line-height: 1.5; }
+    .faq-chevron {
+      flex-shrink: 0;
+      color: var(--primary);
+      transition: transform 0.3s var(--ease-out, ease);
+    }
+    .faq-box[open] .faq-chevron { transform: rotate(180deg); }
+    .faq-answer {
+      padding: 0 20px 18px;
+      color: #444;
+      line-height: 1.7;
+      border-top: 1px solid var(--border);
+      margin: 0 20px;
+      padding-top: 14px;
+      padding-bottom: 18px;
+    }
     .faq-answer a { color: var(--primary); text-decoration: underline; }
     .bottom-actions { display: flex; justify-content: center; margin: 0 auto 28px; }
     @media (max-width: 900px) { .search-wrap { flex: 1 1 100%; max-width: 100%; } }
@@ -60,30 +95,32 @@
       </select>
     </div>
 
-    <!-- Q&A 內容保留原樣 -->
-    <div class="faq-box" data-category="交通 陳情">
-      <p class="faq-question">Q1：被交通違規開罰單可以陳情嗎？</p>
-      <p class="faq-answer">可以！若您有合理的理由或需要協助處理，可以透過陳情表單說明狀況，我們會協助處理與回覆。</p>
-    </div>
+    <!-- Q&A 手風琴 -->
+    <details class="faq-box" data-category="交通 陳情">
+      <summary class="faq-question"><span>Q1：被交通違規開罰單可以陳情嗎？</span><i data-lucide="chevron-down" class="faq-chevron" style="width:20px;height:20px"></i></summary>
+      <div class="faq-answer">可以！若您有合理的理由或需要協助處理，可以透過陳情表單說明狀況，我們會協助處理與回覆。</div>
+    </details>
 
-    <div class="faq-box" data-category="陳情">
-      <p class="faq-question">Q2：填完陳情表單後要等多久才有回覆？</p>
-      <p class="faq-answer">通常 3～5 個工作天內會有回覆，若情況緊急也可來電通知我們。</p>
-    </div>
+    <details class="faq-box" data-category="陳情">
+      <summary class="faq-question"><span>Q2：填完陳情表單後要等多久才有回覆？</span><i data-lucide="chevron-down" class="faq-chevron" style="width:20px;height:20px"></i></summary>
+      <div class="faq-answer">通常 3～5 個工作天內會有回覆，若情況緊急也可來電通知我們。</div>
+    </details>
 
-    <div class="faq-box" data-category="陳情">
-      <p class="faq-question">Q3：可以匿名陳情嗎？</p>
-      <p class="faq-answer">為了讓我們能順利聯絡與協助處理，建議留下聯繫方式。</p>
-    </div>
+    <details class="faq-box" data-category="陳情">
+      <summary class="faq-question"><span>Q3：可以匿名陳情嗎？</span><i data-lucide="chevron-down" class="faq-chevron" style="width:20px;height:20px"></i></summary>
+      <div class="faq-answer">為了讓我們能順利聯絡與協助處理，建議留下聯繫方式。</div>
+    </details>
 
-    <div class="faq-box" data-category="陳情">
-      <p class="faq-question">Q4：我在陳情整合平台寫信完成送出後，為什麼沒有收到確認信呢？</p>
-      <p class="faq-answer">一、有些電子郵件系統為了避免您收到過多的廣告垃圾郵件，會設有過濾垃圾郵件的機制…</p>
-    </div>
+    <details class="faq-box" data-category="陳情">
+      <summary class="faq-question"><span>Q4：我在陳情整合平台寫信完成送出後，為什麼沒有收到確認信呢？</span><i data-lucide="chevron-down" class="faq-chevron" style="width:20px;height:20px"></i></summary>
+      <div class="faq-answer">
+        一、有些電子郵件系統為了避免您收到過多的廣告垃圾郵件，會設有過濾垃圾郵件的機制，但這類機制時常有誤判的情形，如果您沒有收到確認信，建議您先至垃圾郵件區尋找，或將本府信箱「csc690423@gmail.com」設定至正常郵件名單中。<br><br>
+        二、如前項功能查無資料，依以往經驗，多半為您案件登錄時電子郵件填寫錯誤，建議重新登錄案件，或來電（電話04-22824639）詢問。</div>
+    </details>
 
-    <div class="faq-box" data-category="社會福利">
-      <p class="faq-question">Q5：如何申請低收入戶~申辦條件為何？申請程序為何？</p>
-      <p class="faq-answer">
+    <details class="faq-box" data-category="社會福利">
+      <summary class="faq-question"><span>Q5：如何申請低收入戶~申辦條件為何？申請程序為何？</span><i data-lucide="chevron-down" class="faq-chevron" style="width:20px;height:20px"></i></summary>
+      <div class="faq-answer">
         一、依社會救助法第四條規定，低收入戶指申請戶之戶內人口要設籍並實際居住於本市，且住在國內的時間超過183天，並經申請戶籍所在地直轄市、縣（市）主管機關審核認定，符合家庭總收入平均分配全家人口，每人每月在最低生活費以下，且家庭財產未超過中央、直轄市主管機關公告之當年度一定金額者。<br><br>
         二、低收入戶申請資格及其條件，茲說明如下：<br>
         (一)最低生活費：臺中市政府公告114年度每人每月最低生活費為新臺幣1萬6,077元。<br>
@@ -99,23 +136,23 @@
         (三)申請人及申請列冊人口之郵局及其他金融機構存摺封面及最近1年內頁影本。<br>
         (四)申請人身分證及印章，如委託代辦，代辦人亦需攜帶身分證及印章。<br>
         (五)其他相關證明文件，視必要由公所說明、通知補件。
-      </p>
-    </div>
+      </div>
+    </details>
 
-    <div class="faq-box" data-category="交通">
-      <p class="faq-question">Q6：交岔路口10公尺內可以臨時停車嗎？</p>
-      <p class="faq-answer">依據「道路交通安全規則」第111條規定：「交岔路口10公尺內不得臨時停車，即便未繪設禁止臨時停車紅線，亦不得臨時停車。」</p>
-    </div>
+    <details class="faq-box" data-category="交通">
+      <summary class="faq-question"><span>Q6：交岔路口10公尺內可以臨時停車嗎？</span><i data-lucide="chevron-down" class="faq-chevron" style="width:20px;height:20px"></i></summary>
+      <div class="faq-answer">依據「道路交通安全規則」第111條規定：「交岔路口10公尺內不得臨時停車，即便未繪設禁止臨時停車紅線，亦不得臨時停車。」</div>
+    </details>
 
-    <div class="faq-box" data-category="長照 社會福利">
-      <p class="faq-question">Q7：長期照顧服務有哪些？</p>
-      <p class="faq-answer">長期照顧照服務包括照顧及專業服務、交通接送、輔具購買租借及無障礙環境改善、喘息服務等服務。<br><br>
-        需要諮詢請撥「1966長照服務專線」</p>
-    </div>
+    <details class="faq-box" data-category="長照 社會福利">
+      <summary class="faq-question"><span>Q7：長期照顧服務有哪些？</span><i data-lucide="chevron-down" class="faq-chevron" style="width:20px;height:20px"></i></summary>
+      <div class="faq-answer">長期照顧照服務包括照顧及專業服務、交通接送、輔具購買租借及無障礙環境改善、喘息服務等服務。<br><br>
+        需要諮詢請撥「1966長照服務專線」</div>
+    </details>
 
-    <div class="faq-box" data-category="社會福利">
-      <p class="faq-question">Q8：請問如何請領「敬老愛心卡」？</p>
-      <p class="faq-answer">
+    <details class="faq-box" data-category="社會福利">
+      <summary class="faq-question"><span>Q8：請問如何請領「敬老愛心卡」？</span><i data-lucide="chevron-down" class="faq-chevron" style="width:20px;height:20px"></i></summary>
+      <div class="faq-answer">
         一、優待對象：凡設籍臺中市，並年滿65歲以上（原住民55歲）或領有身心障礙證明之市民。<br><br>
         二、申請「敬老愛心卡」攜帶證件：<br>
         (一)身分證正本、身心障礙證明（身心障礙者攜帶）、最近兩年半身照片二吋一張。<br>
@@ -123,22 +160,22 @@
         (三)未攜帶戶籍謄本者，可憑身分證或身心障礙證明由公所至「內政部全國社福津貼給付資料比對資訊系統」查詢戶籍資料。<br><br>
         三、已領有「敬老愛心卡」，因遷出戶籍經鎖卡(列入黑名單)者，若再遷入本市戶籍，以補發者(自費)方式處理。<br><br>
         四、依據臺中市政府辦理老人及身心障礙者敬老愛心卡乘車及各項補助要點，第八點說明：敬老愛心卡限申請者「本人」使用，使用時應主動出示身分證或身心障礙證明，如有轉讓或轉借他人使用，經查獲得停止使用一年、查獲第二次者得停止使用三年、查獲第三次(含)以上者得停止使用五年。
-      </p>
-    </div>
+      </div>
+    </details>
 
-    <div class="faq-box" data-category="環境">
-      <p class="faq-question">Q9：如何申請水肥清運、清溝？</p>
-      <p class="faq-answer">請電洽各區清潔隊或點選以下連結進行線上申請<br>
+    <details class="faq-box" data-category="環境">
+      <summary class="faq-question"><span>Q9：如何申請水肥清運、清溝？</span><i data-lucide="chevron-down" class="faq-chevron" style="width:20px;height:20px"></i></summary>
+      <div class="faq-answer">請電洽各區清潔隊或點選以下連結進行線上申請<br>
         <a href="https://eservices.taichung.gov.tw/AdvSearch/CaseInfo/160/Notices/150008" target="_blank">
-          點我前往申請頁面</a></p>
-    </div>
+          點我前往申請頁面</a></div>
+    </details>
 
-    <div class="faq-box" data-category="環境">
-      <p class="faq-question">Q10：大宗垃圾(廢傢俱)清運？</p>
-      <p class="faq-answer">請電洽各區清潔隊或點選以下連結進行線上申請<br>
+    <details class="faq-box" data-category="環境">
+      <summary class="faq-question"><span>Q10：大宗垃圾(廢傢俱)清運？</span><i data-lucide="chevron-down" class="faq-chevron" style="width:20px;height:20px"></i></summary>
+      <div class="faq-answer">請電洽各區清潔隊或點選以下連結進行線上申請<br>
         <a href="https://eservices.taichung.gov.tw/AdvSearch/CaseInfo/160/Notices/150010" target="_blank">
-          點我前往申請頁面</a></p>
-    </div>
+          點我前往申請頁面</a></div>
+    </details>
   </section>
 
   <div class="bottom-actions">
@@ -157,18 +194,21 @@
       const selectedCategory = categorySelect.value;
 
       faqBoxes.forEach(box => {
-        const question = box.querySelector('.faq-question').innerText.toLowerCase();
+        const question = box.querySelector('.faq-question span').innerText.toLowerCase();
+        const answer = (box.querySelector('.faq-answer')?.innerText || '').toLowerCase();
         const category = box.getAttribute('data-category') || '';
 
-        const matchKeyword = keyword === "" || question.includes(keyword);
-        const matchCategory = selectedCategory === "全部" || category.includes(selectedCategory);
+        const matchKeyword = keyword === '' || question.includes(keyword) || answer.includes(keyword);
+        const matchCategory = selectedCategory === '全部' || category.includes(selectedCategory);
 
-        box.style.display = (matchKeyword && matchCategory) ? "block" : "none";
+        box.style.display = (matchKeyword && matchCategory) ? 'block' : 'none';
       });
     }
 
     searchInput.addEventListener('input', filterFaq);
     categorySelect.addEventListener('change', filterFaq);
+
+    if (typeof lucide !== 'undefined') lucide.createIcons();
   </script>
 
 </body>

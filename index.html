@@ -53,63 +53,47 @@
   <div id="topbar-mount"></div>
 
   <main>
-    <!-- Hero 輪播 + CTA -->
-    <section class="hero-section container reveal" aria-label="重點照片">
-      <div class="hero-carousel" id="carousel">
-        <div class="hero-slide slide active">
-          <img src="images/slide1.jpg" alt="服務處外觀">
-          <div class="hero-overlay"></div>
-          <div class="hero-content">
-            <span class="hero-label"><i data-lucide="heart-handshake" style="width:16px;height:16px"></i> 陳雅惠議員</span>
-            <h1 class="hero-title">傾聽每一個聲音，守護在地的每一天</h1>
-            <p class="hero-caption">為民服務、政策參與、進度透明——您的聲音，我們認真對待。</p>
-            <div class="hero-cta">
-              <a href="contact.html" class="btn btn-primary btn-sm">
-                立即陳情 <i data-lucide="arrow-right" class="btn-icon" style="width:16px;height:16px"></i>
-              </a>
-              <a href="announcements.html" class="btn btn-glass btn-sm">最新公告</a>
-              <a href="about.html" class="btn btn-glass btn-sm">了解雅惠議員</a>
-            </div>
+    <!-- Hero 品牌區 -->
+    <section class="hero-brand container reveal" aria-label="品牌介紹">
+      <div class="hero-brand-inner">
+        <div class="hero-brand-copy">
+          <span class="hero-eyebrow">
+            <i data-lucide="heart-handshake" style="width:16px;height:16px"></i>
+            臺中市議員 · 陳雅惠
+          </span>
+          <h1 class="hero-brand-title">為市民打造<br>更透明、更便利的服務</h1>
+          <p class="hero-brand-lead">傾聽每一個聲音，守護在地的每一天。線上陳情、進度查詢、法律諮詢，讓民意被聽見、被處理、被追蹤。</p>
+          <div class="hero-brand-cta">
+            <a href="contact.html" class="btn btn-primary">
+              立即陳情 <i data-lucide="arrow-right" class="btn-icon" style="width:18px;height:18px"></i>
+            </a>
+            <a href="messages.html" class="btn btn-secondary">消息報你知</a>
+            <a href="about.html" class="btn btn-secondary">了解議員</a>
+          </div>
+          <div class="hero-brand-stats">
+            <div class="hero-stat"><strong>線上受理</strong><span>隨時反映問題</span></div>
+            <div class="hero-stat"><strong>進度透明</strong><span>案件可查詢</span></div>
+            <div class="hero-stat"><strong>在地服務</strong><span>南區服務處</span></div>
           </div>
         </div>
-        <div class="hero-slide slide">
-          <img src="images/slide2.jpg" alt="議會質詢片段">
-          <div class="hero-overlay"></div>
-          <div class="hero-content">
-            <span class="hero-label"><i data-lucide="landmark" style="width:16px;height:16px"></i> 議會質詢</span>
-            <h1 class="hero-title">積極監督與建言，爭取在地建設</h1>
-            <p class="hero-caption">針對民生、交通、教育等議題，在議會為民發聲。</p>
-            <div class="hero-cta">
-              <a href="contact.html" class="btn btn-primary btn-sm">立即陳情</a>
-              <a href="news.html" class="btn btn-glass btn-sm">相關新聞</a>
-              <a href="about.html" class="btn btn-glass btn-sm">了解雅惠議員</a>
-            </div>
+        <div class="hero-brand-visual">
+          <div class="hero-photo-wrap">
+            <div class="hero-photo-ring" aria-hidden="true"></div>
+            <img src="pose.png" alt="陳雅惠議員照片" class="hero-photo pose-photo">
+            <div class="hero-float-badge">為民服務 × 政策參與 × 進度透明</div>
           </div>
         </div>
-        <div class="hero-slide slide">
-          <img src="images/slide3.jpg" alt="里內活動合照">
-          <div class="hero-overlay"></div>
-          <div class="hero-content">
-            <span class="hero-label"><i data-lucide="users" style="width:16px;height:16px"></i> 社區活動</span>
-            <h1 class="hero-title">與里民同行，連結社區向心力</h1>
-            <p class="hero-caption">環境清潔、關懷長者——我們一直在您身邊。</p>
-            <div class="hero-cta">
-              <a href="announcements.html" class="btn btn-primary btn-sm">最新公告</a>
-              <a href="about.html" class="btn btn-glass btn-sm">了解雅惠議員</a>
-            </div>
-          </div>
-        </div>
-
-        <button class="hero-ctrl ctrl prev" aria-label="上一張" id="prev">&#10094;</button>
-        <button class="hero-ctrl ctrl next" aria-label="下一張" id="next">&#10095;</button>
-        <div class="hero-dots dots" id="dots"></div>
       </div>
     </section>
 
-    <!-- 議員介紹 -->
+    <!-- 議員理念 -->
     <section class="section container reveal" id="about-preview">
+      <div class="section-header">
+        <h2><span class="section-icon"><i data-lucide="heart" style="width:20px;height:20px"></i></span> 雅惠議員理念</h2>
+        <p>從傾聽出發，讓改變真正發生</p>
+      </div>
       <div class="about-preview">
-        <img src="headshot.jpg" alt="陳雅惠議員照片" class="about-preview-photo">
+        <img src="pose.png" alt="陳雅惠議員照片" class="about-preview-photo pose-photo img-hover">
         <div class="about-preview-text">
           <h3>陳雅惠議員</h3>
           <p>從地方服務到議會監督，我一直都在市民的第一線傾聽與努力。無論是學校旁的紅綠燈、巷子裡的排水問題，還是弱勢家庭的照顧，我都認真看待每一個聲音。</p>
@@ -121,13 +105,73 @@
       </div>
     </section>
 
+    <!-- 民眾怎麼使用 -->
+    <section class="section container reveal" id="how-to">
+      <div class="steps-section">
+        <div class="section-header" style="margin-bottom:0">
+          <h2><span class="section-icon"><i data-lucide="route" style="width:20px;height:20px"></i></span> 民眾怎麼使用</h2>
+          <p>三步驟完成陳情，進度隨時掌握</p>
+        </div>
+        <div class="steps-grid reveal-stagger">
+          <div class="step-card">
+            <span class="step-num">1</span>
+            <h3>填寫線上陳情</h3>
+            <p>描述您遇到的問題，留下聯絡方式，服務團隊將盡快受理。</p>
+            <a href="contact.html" class="step-link">前往陳情 <i data-lucide="arrow-right" style="width:14px;height:14px"></i></a>
+          </div>
+          <div class="step-card">
+            <span class="step-num">2</span>
+            <h3>取得案件編號</h3>
+            <p>送出後系統會提供案件編號，請妥善保存以便後續查詢。</p>
+            <a href="faq.html" class="step-link">查看說明 <i data-lucide="arrow-right" style="width:14px;height:14px"></i></a>
+          </div>
+          <div class="step-card">
+            <span class="step-num">3</span>
+            <h3>查詢處理進度</h3>
+            <p>輸入案件編號與信箱，即可即時掌握案件處理狀態。</p>
+            <a href="track.html" class="step-link">查詢進度 <i data-lucide="arrow-right" style="width:14px;height:14px"></i></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 服務成果 -->
+    <section class="section container reveal" id="results">
+      <div class="section-header">
+        <h2><span class="section-icon"><i data-lucide="award" style="width:20px;height:20px"></i></span> 服務成果</h2>
+        <p>一站式民意交流平台，讓您的需求被聽見、被處理、被追蹤</p>
+      </div>
+      <div class="stats-row reveal-stagger">
+        <div class="stat-card">
+          <div class="stat-icon"><i data-lucide="zap" style="width:22px;height:22px"></i></div>
+          <strong>快速回應</strong>
+          <span>線上陳情即時受理</span>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon"><i data-lucide="eye" style="width:22px;height:22px"></i></div>
+          <strong>進度透明</strong>
+          <span>隨時查詢案件狀態</span>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon"><i data-lucide="scale" style="width:22px;height:22px"></i></div>
+          <strong>法律諮詢</strong>
+          <span>免費初步權益釐清</span>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon"><i data-lucide="megaphone" style="width:22px;height:22px"></i></div>
+          <strong>政策參與</strong>
+          <span>歡迎提出政見建議</span>
+        </div>
+      </div>
+    </section>
+
     <!-- 熱門服務 -->
     <section class="section container reveal" id="services">
       <div class="section-header">
         <h2><span class="section-icon"><i data-lucide="layout-grid" style="width:20px;height:20px"></i></span> 熱門服務</h2>
         <p>選擇您需要的服務，我們隨時為您效勞</p>
       </div>
-      <div class="grid-3">
+      <div class="grid-3 reveal-stagger">
         <a href="contact.html" class="service-card">
           <div class="service-icon"><i data-lucide="mail" style="width:28px;height:28px"></i></div>
           <h3>線上陳情</h3>
@@ -149,36 +193,6 @@
       </div>
     </section>
 
-    <!-- 服務特色 -->
-    <section class="section container reveal" id="features">
-      <div class="section-header">
-        <h2><span class="section-icon"><i data-lucide="sparkles" style="width:20px;height:20px"></i></span> 服務特色</h2>
-        <p>一站式民意交流平台，讓您的需求被聽見、被處理、被追蹤</p>
-      </div>
-      <div class="grid-4">
-        <div class="feature-card">
-          <div class="feature-icon"><i data-lucide="zap" style="width:26px;height:26px"></i></div>
-          <h3>快速回應</h3>
-          <p>線上陳情即時受理，服務團隊盡快處理您的需求</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon"><i data-lucide="eye" style="width:26px;height:26px"></i></div>
-          <h3>進度透明</h3>
-          <p>隨時查詢案件處理進度，掌握每一個環節</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon"><i data-lucide="scale" style="width:26px;height:26px"></i></div>
-          <h3>法律諮詢</h3>
-          <p>免費初步法律諮詢，協助釐清權益與對策</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon"><i data-lucide="megaphone" style="width:26px;height:26px"></i></div>
-          <h3>政策參與</h3>
-          <p>歡迎提出政見建議，讓民意進入議會討論</p>
-        </div>
-      </div>
-    </section>
-
     <!-- 法律諮詢 CTA -->
     <section class="section container reveal" id="legal-cta">
       <div class="cta-banner">
@@ -191,83 +205,96 @@
     </section>
   </main>
 
-  <div id="footer-mount"></div>
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <div class="footer-logo-mark">
+            <img src="shared/民進黨黨徽.png" alt="民主進步黨黨徽" class="dpp-logo" width="52" height="52">
+          </div>
+          <div>
+            <h3>陳雅惠議員</h3>
+            <p class="footer-tagline">民意交流與服務平台</p>
+          </div>
+        </div>
+        <p class="footer-desc">傾聽每一個聲音，守護在地的每一天。<br>為民服務 × 政策參與 × 進度透明</p>
+        <a href="https://lin.ee/hR8ZJk4" class="footer-cta" target="_blank" rel="noopener noreferrer">
+          <i data-lucide="message-circle" style="width:18px;height:18px"></i>
+          官方 LINE 聯絡我們
+        </a>
+        <div class="footer-social">
+          <a href="https://www.facebook.com/share/19exjXmUss/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+            <svg class="social-icon-fb" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+              <path fill="currentColor" d="M13.5 22v-8h2.7l.4-3.1h-3.1V8.6c0-.9.2-1.5 1.5-1.5H17V4.1C16.4 4 15.5 4 14.4 4 12 4 10.5 5.2 10.5 8v2.9H8v3.1h2.5v8h3z"/>
+            </svg>
+          </a>
+          <a href="https://lin.ee/hR8ZJk4" target="_blank" rel="noopener noreferrer" aria-label="LINE">
+            <span class="social-letter">L</span>
+          </a>
+          <a href="https://www.threads.com/@gogo_yaya199" target="_blank" rel="noopener noreferrer" aria-label="Threads">
+            <i data-lucide="at-sign" style="width:18px;height:18px"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>快速連結</h4>
+        <ul>
+          <li><a href="about.html">關於議員</a></li>
+          <li><a href="messages.html">消息報你知</a></li>
+          <li><a href="faq.html">常見問題</a></li>
+          <li><a href="legal-time.html">法律諮詢</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>線上服務</h4>
+        <ul>
+          <li><a href="contact.html">陳情服務</a></li>
+          <li><a href="proposal.html">政見建議</a></li>
+          <li><a href="track.html">案件進度查詢</a></li>
+          <li><a href="announcements.html">最新公告</a></li>
+          <li><a href="news.html">相關新聞</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>聯絡資訊</h4>
+        <ul>
+          <li>
+            <a href="https://www.google.com/maps/search/?api=1&amp;query=%E8%87%BA%E4%B8%AD%E5%B8%82%E8%AD%B0%E5%93%A1%20%E9%99%B3%E9%9B%85%E6%83%A0%20%E6%9C%8D%E5%8B%99%E8%99%95" target="_blank" rel="noopener noreferrer">
+              <i data-lucide="map-pin" style="width:14px;height:14px;vertical-align:-2px;margin-right:4px"></i>
+              台中市南區正義街236號
+            </a>
+          </li>
+          <li>
+            <a href="tel:0422824639">
+              <i data-lucide="phone" style="width:14px;height:14px;vertical-align:-2px;margin-right:4px"></i>
+              04-2282-4639
+            </a>
+          </li>
+          <li>
+            <a href="https://lin.ee/hR8ZJk4" target="_blank" rel="noopener">
+              <i data-lucide="message-circle" style="width:14px;height:14px;vertical-align:-2px;margin-right:4px"></i>
+              官方 LINE 預約
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>&copy; 2026 陳雅惠議員服務團隊 · All Rights Reserved</span>
+      <span>
+        <a href="index.html">回首頁</a>
+        &nbsp;·&nbsp;
+        <a href="contact.html">聯絡我們</a>
+      </span>
+    </div>
+  </footer>
 
   <!-- 自動載入 topbar -->
   <script src="shared/topbar-loader.js"></script>
-
-  <!-- Hero 輪播腳本 -->
-  <script>
-    (function () {
-      const root = document.getElementById('carousel');
-      if (!root) return;
-
-      const slides = Array.from(root.querySelectorAll('.slide'));
-      const prev = root.querySelector('#prev');
-      const next = root.querySelector('#next');
-      const dotsEl = root.querySelector('#dots');
-      const INTERVAL = 2500;
-      let i = 0;
-      let timer = null;
-      let paused = false;
-
-      function go(n) {
-        slides[i].classList.remove('active');
-        dotsEl.children[i]?.classList.remove('active');
-        i = (n + slides.length) % slides.length;
-        slides[i].classList.add('active');
-        dotsEl.children[i]?.classList.add('active');
-      }
-
-      function stop() {
-        clearTimeout(timer);
-        timer = null;
-      }
-
-      function scheduleNext() {
-        stop();
-        if (paused) return;
-        timer = setTimeout(function () {
-          go(i + 1);
-          scheduleNext();
-        }, INTERVAL);
-      }
-
-      function navigate(n) {
-        go(n);
-        scheduleNext();
-      }
-
-      slides.forEach(function (_, idx) {
-        const d = document.createElement('button');
-        d.className = 'hero-dot dot' + (idx === 0 ? ' active' : '');
-        d.addEventListener('click', function () { navigate(idx); });
-        dotsEl.appendChild(d);
-      });
-
-      prev.addEventListener('click', function () { navigate(i - 1); });
-      next.addEventListener('click', function () { navigate(i + 1); });
-
-      root.addEventListener('mouseenter', function () {
-        paused = true;
-        stop();
-      });
-      root.addEventListener('mouseleave', function () {
-        paused = false;
-        scheduleNext();
-      });
-
-      document.addEventListener('visibilitychange', function () {
-        if (document.hidden) {
-          stop();
-        } else if (!paused) {
-          scheduleNext();
-        }
-      });
-
-      scheduleNext();
-    })();
-  </script>
 
 </body>
 </html>

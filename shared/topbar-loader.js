@@ -14,7 +14,7 @@
         if (!mount) return;
         mount.outerHTML = html;
         const s = document.createElement('script');
-        s.src = p + 'topbar.js';
+        s.src = p + 'topbar.js?v=5';
         document.body.appendChild(s);
         setTimeout(function () {
           if (typeof lucide !== 'undefined') lucide.createIcons();

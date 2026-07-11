@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>加入官方 LINE - 陳雅惠議員服務平台</title>
+  <link rel="stylesheet" href="shared/design-system.css">
+  <link rel="stylesheet" href="shared/topbar.css">
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+  <script src="shared/site.js" defer></script>
+  <style>
+    body { min-height: 100svh; display: flex; flex-direction: column; }
+    .content-wrap { flex: 1; padding-bottom: var(--space-lg); }
+    .qr-card {
+      width: min(420px, 92%);
+      margin: var(--space-md) auto 0;
+      padding: var(--space-md);
+      background: #fff;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-md);
+      text-align: center;
+    }
+    .qr-card img {
+      width: min(280px, 80vw);
+      height: auto;
+      display: block;
+      margin: 0 auto var(--space-sm);
+      border: 1px solid #e8e8e8;
+      border-radius: var(--radius-sm);
+      background: #fff;
+    }
+    .qr-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-primary, #222);
+      margin-bottom: 0.5rem;
+    }
+    .qr-desc {
+      color: var(--text-muted, #666);
+      line-height: 1.7;
+      margin-bottom: var(--space-sm);
+    }
+    .center-button {
+      display: flex;
+      justify-content: center;
+      gap: var(--space-sm);
+      flex-wrap: wrap;
+      margin-top: var(--space-sm);
+    }
+    .note {
+      text-align: center;
+      color: var(--text-muted);
+      margin: var(--space-sm) auto var(--space-lg);
+      padding: 0 var(--space-sm);
+      line-height: 1.7;
+    }
+  </style>
+</head>
+<body>
+  <div id="topbar-mount"></div>
+  <script src="shared/topbar-loader.js"></script>
+
+  <div class="content-wrap reveal">
+    <h1 class="page-title" style="margin-top:var(--space-md);">加入官方 LINE</h1>
+
+    <div class="qr-card">
+      <p class="qr-title">掃描 QR Code 加入好友</p>
+      <img
+        src="https://qr-official.line.me/gs/M_511ezrek_GW.png"
+        alt="陳雅惠議員官方 LINE QR Code"
+        width="280"
+        height="280"
+      >
+      <p class="qr-desc">請使用手機版 LINE 掃描上方 QR Code 加入好友。</p>
+    </div>
+
+    <div class="center-button">
+      <a href="about.html" class="btn btn-secondary">返回關於議員</a>
+      <a href="https://lin.ee/hR8ZJk4" class="btn btn-primary" target="_blank" rel="noopener">
+        用手機開啟 LINE 連結
+        <i data-lucide="external-link" class="btn-icon" style="width:16px;height:16px"></i>
+      </a>
+    </div>
+
+    <p class="note">若您已使用手機瀏覽，也可直接點擊「用手機開啟 LINE 連結」加入好友。</p>
+  </div>
+
+  <div id="footer-mount"></div>
+</body>
+</html>

@@ -134,25 +134,30 @@
 
     .link-section {
       display: flex;
-      justify-content: space-between;
-      gap: 0px;
-      padding: 20px 10px;
+      justify-content: space-around;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 20px 16px;
       background: #fff;
       border-radius: 16px;
       box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     }
 
     .link-section a {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex: 1;
+      min-width: 0;
       text-decoration: none;
       color: inherit;
       text-align: center;
-      width: 30%;
     }
 
     .link-section a img {
-      width: 100%;
-      max-width: 110px;
+      width: 110px;
       height: 110px;
+      max-width: 100%;
       object-fit: cover;
       border-radius: 12px;
       border: 2px solid #ccc;
@@ -167,6 +172,8 @@
 
     .link-section p {
       margin-top: 10px;
+      width: 100%;
+      text-align: center;
       font-size: 1em;
       font-weight: bold;
       color: #333;
@@ -301,7 +308,7 @@
             <img src="img1.jpg" alt="Facebook">
             <p>追蹤臉書</p>
           </a>
-          <a href="https://lin.ee/hR8ZJk4" target="_blank">
+          <a href="line.html">
             <img src="img2.jpg" alt="Line">
             <p>加入官方 Line</p>
           </a>

@@ -70,17 +70,27 @@
 
   /* ── Footer ── */
   async function loadFooter() {
+    if (document.querySelector('.site-footer')) {
+      initLucide();
+      return;
+    }
     const mount = document.getElementById('footer-mount');
     if (!mount) return;
     for (const p of prefixes) {
       try {
         const res = await fetch(p + 'footer.html', { cache: 'no-store' });
         if (!res.ok) continue;
-        mount.outerHTML = await res.text();
+        const html = await res.text();
+        if (!html.trim()) continue;
+        mount.outerHTML = html;
         initLucide();
         return;
       } catch (e) {}
     }
+    mount.innerHTML =
+      '<footer class="site-footer" style="padding:24px;text-align:center;color:#ccc;">' +
+      '無法載入頁尾。請以本地伺服器（Live Server）開啟網站。' +
+      '</footer>';
   }
 
   /* ── Back to Top ── */
@@ -105,7 +115,7 @@
 
   /* ── Scroll Reveal ── */
   function initScrollReveal() {
-    const els = document.querySelectorAll('.reveal');
+    const els = document.querySelectorAll('.reveal, .reveal-stagger');
     if (!els.length) return;
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       els.forEach(function (el) { el.classList.add('revealed'); });
@@ -118,8 +128,23 @@
           obs.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
     els.forEach(function (el) { obs.observe(el); });
+  }
+
+  /* ── 按鈕 Ripple ── */
+  function initButtonRipple() {
+    document.addEventListener('click', function (e) {
+      const btn = e.target.closest('.btn');
+      if (!btn) return;
+      const rect = btn.getBoundingClientRect();
+      btn.style.setProperty('--ripple-x', (e.clientX - rect.left) + 'px');
+      btn.style.setProperty('--ripple-y', (e.clientY - rect.top) + 'px');
+      btn.classList.remove('ripple-active');
+      void btn.offsetWidth;
+      btn.classList.add('ripple-active');
+      setTimeout(function () { btn.classList.remove('ripple-active'); }, 600);
+    });
   }
 
   /* ── Lucide Icons ── */
@@ -132,6 +157,7 @@
   /* ── Init ── */
   function initAll() {
     initScrollReveal();
+    initButtonRipple();
     initLucide();
   }
 

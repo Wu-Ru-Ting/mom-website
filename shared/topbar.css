@@ -8,7 +8,7 @@
   font-size: 1rem;
 }
 
-html { scroll-padding-top: var(--topbarH); }
+html { scroll-padding-top: var(--topbarH); scrollbar-gutter: stable; }
 body { padding-top: calc(var(--topbarH) + 1px) !important; }
 
 a { color: inherit; text-decoration: none; }
@@ -21,7 +21,7 @@ a { color: inherit; text-decoration: none; }
   background: linear-gradient(135deg, #00993d 0%, #007a30 50%, #006628 100%);
   color: #fff;
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.18);
-  backdrop-filter: blur(8px);
+  overflow: visible;
 }
 
 .nav {
@@ -32,6 +32,7 @@ a { color: inherit; text-decoration: none; }
   padding: 10px 12px 10px 10px;
   align-items: center;
   flex-wrap: wrap;
+  overflow: visible;
 }
 
 /* 品牌 Logo */
@@ -109,28 +110,30 @@ a { color: inherit; text-decoration: none; }
 }
 
 /* 下拉說明（桌機） */
-.nav-item { position: relative; display: inline-block; }
+.nav-item { position: relative; display: inline-block; overflow: visible; }
 
 .dropdown-panel {
   position: absolute;
   top: calc(100% + 10px);
   left: 50%;
-  transform: translateX(-50%) translateY(8px);
-  width: 300px;
-  max-width: 85vw;
+  transform: translateX(-50%);
+  width: min(300px, calc(100vw - 40px));
   background: #fff;
   color: #222;
   border: 1px solid #e6e6e6;
   border-radius: var(--radius-md, 16px);
   box-shadow: var(--shadow-lg, 0 16px 48px rgba(0, 0, 0, 0.12));
-  padding: 14px 16px;
+  padding: 14px 18px;
   line-height: 1.55;
   font-size: 0.92rem;
+  overflow-wrap: break-word;
+  word-break: normal;
+  box-sizing: border-box;
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
   transition: opacity 0.22s ease, transform 0.22s ease, visibility 0.22s;
-  z-index: 9999;
+  z-index: 10001;
 }
 
 .dropdown-panel::before {
@@ -144,16 +147,47 @@ a { color: inherit; text-decoration: none; }
   border-color: transparent transparent #fff transparent;
 }
 
-.nav-item:hover .dropdown-panel,
-.nav-item:focus-within .dropdown-panel {
-  opacity: 1;
-  visibility: visible;
-  pointer-events: auto;
-  transform: translateX(-50%) translateY(0);
+/* 最右側按鈕：靠右對齊，避免被螢幕裁切 */
+.nav-item:last-child .dropdown-panel {
+  left: auto;
+  right: 0;
+  transform: translateY(8px);
+}
+
+.nav-item:last-child .dropdown-panel::before {
+  left: auto;
+  right: 28px;
+  transform: none;
+}
+
+/* 桌機 hover 顯示 */
+@media (min-width: 901px) {
+  .nav-item:hover .dropdown-panel,
+  .nav-item:focus-within .dropdown-panel {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  .nav-item:last-child:hover .dropdown-panel,
+  .nav-item:last-child:focus-within .dropdown-panel {
+    transform: translateY(0);
+  }
+
+  .nav-item:not(:last-child):hover .dropdown-panel,
+  .nav-item:not(:last-child):focus-within .dropdown-panel {
+    transform: translateX(-50%) translateY(0);
+  }
 }
 
 /* 手機選單 */
-.nav-links { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+.nav-links {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  flex-wrap: wrap;
+  overflow: visible;
+}
 
 .hamburger {
   display: none;
@@ -219,12 +253,15 @@ a { color: inherit; text-decoration: none; }
   z-index: 999;
   display: flex;
   flex-direction: column;
-  padding: 12px 14px 24px;
+  padding: 12px 16px 24px;
   transition: right 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   overflow-y: auto;
+  overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
   overscroll-behavior: contain;
   padding-bottom: max(24px, env(safe-area-inset-bottom));
+  scrollbar-gutter: stable;
+  box-sizing: border-box;
 }
 
 .mobile-menu.open { right: 0; }
@@ -296,6 +333,8 @@ a { color: inherit; text-decoration: none; }
   margin: 4px 4px 8px 4px;
   border-left: 3px solid #d9f2e3;
   padding-left: 12px;
+  padding-right: 8px;
+  overflow-wrap: break-word;
 }
 
 .m-br { display: none; }
