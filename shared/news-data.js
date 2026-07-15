@@ -34,6 +34,14 @@ window.NEWS_DATA = [
 
   // 可點連結的卡片
   {
+    title: "陳雅惠會勘大智排水工程 要求市府提前釐清接管分工、莫讓居民善後",
+    desc: "點一下看更多",
+    date: "2026-07-15",
+    source: "新華報導／記者黃登洲",
+    categories: ["在地建設"],
+    href: "https://ccss3172.blogspot.com/2026/07/blog-post_609.html?m=1"
+  },
+  {
     title: "中市公車寒暑假就減班 議員批搭公車也有上班族遲到扣薪誰負責？",
     desc: "點一下看更多",
     date: "2026-07-09",
