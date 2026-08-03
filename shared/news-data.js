@@ -34,6 +34,38 @@ window.NEWS_DATA = [
 
   // 可點連結的卡片
   {
+    title: "校園交通不能等陳情　陳雅惠促市府逐校盤點改善",
+    desc: "點一下看更多",
+    date: "2026-08-03",
+    source: "新華報導／記者曾彥霖",
+    categories: ["議會質詢"],
+    href: "https://ccss3172.blogspot.com/2026/08/blog-post_797.html"
+  },
+  {
+    title: "科技執法不能只開單　市議員陳雅惠促先改善危險路口 讓市民看見安全改善 而非只看到罰單增加",
+    desc: "點一下看更多",
+    date: "2026-07-31",
+    source: "臺灣人民報／記者陳世宗",
+    categories: ["議會質詢"],
+    href: "https://www.peponews.tw/2026/07/31/258852/"
+  },
+  {
+    title: "營養午餐免費不能犧牲品質　市議員陳雅惠促市府提出全市廚餘解方",
+    desc: "點一下看更多",
+    date: "2026-07-30",
+    source: "大宇宙新聞 民時新聞／記者張德欽、張珊瑜、張祐瑄、張耿慈、趙宏進",
+    categories: ["議會質詢"],
+    href: "https://macrocosm.tw/%E7%87%9F%E9%A4%8A%E5%8D%88%E9%A4%90%E5%85%8D%E8%B2%BB%E4%B8%8D%E8%83%BD%E7%8A%A7%E7%89%B2%E5%93%81%E8%B3%AA%E3%80%80%E5%B8%82%E8%AD%B0%E5%93%A1%E9%99%B3%E9%9B%85%E6%83%A0%E4%BF%83%E5%B8%82%E5%BA%9C/"
+  },
+  {
+    title: "台74線交流道回堵影響通勤　民進黨台中市議員陳雅惠促交通局提改善期程、公布治塞成果 台中市政府交通局：雙軌改善台74線壅塞 推動匝道工程、智慧號誌優化車流",
+    desc: "點一下看更多",
+    date: "2026-07-29",
+    source: "元丰傳媒／記者林獻元",
+    categories: ["議會質詢"],
+    href: "https://www.yuanfengmedia.tw/detail.php?type=lastest&id=58885"
+  },
+  {
     title: "陳雅惠會勘大智排水工程 要求市府提前釐清接管分工、莫讓居民善後",
     desc: "點一下看更多",
     date: "2026-07-15",
