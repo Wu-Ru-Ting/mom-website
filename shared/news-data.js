@@ -34,6 +34,46 @@ window.NEWS_DATA = [
 
   // 可點連結的卡片
   {
+    title: "陳雅惠質詢國民運動中心　促運動局加速設備更新、爭取東區設運動中心",
+    desc: "點一下看更多",
+    date: "2026-08-20",
+    source: "新華報導／記者黃登洲",
+    categories: ["議會質詢"],
+    href: "https://ccss3172.blogspot.com/2026/08/blog-post_1770.html"
+  },
+  {
+    title: "中央推動新一波市場升級計畫 陳雅惠籲市府提升建國市場及第三市場環境",
+    desc: "點一下看更多",
+    date: "2026-08-18",
+    source: "中台灣時報／記者官達里",
+    categories: ["議會質詢"],
+    href: "https://www.taiwancnews.com/archives/532514"
+  },
+  {
+    title: "市議員陳雅惠批台中市府資安把關失守　無證照管資安「太誇張」",
+    desc: "點一下看更多",
+    date: "2026-08-17",
+    source: "新華報導／記者黃登洲",
+    categories: ["議會質詢"],
+    href: "https://ccss3172.blogspot.com/2026/08/blog-post_419.html?m=1"
+  },
+  {
+    title: "市府推好孕專車卻「叫不到車」？ 陳雅惠促檢討派車效率",
+    desc: "點一下看更多",
+    date: "2026-08-13",
+    source: "中台灣時報／記者官達里",
+    categories: ["議會質詢"],
+    href: "https://www.taiwancnews.com/archives/532400"
+  },
+  {
+    title: "東區親子館拖逾2年仍未開　市議員陳雅惠追問：到底還有多少個12月？",
+    desc: "點一下看更多",
+    date: "2026-08-11",
+    source: "大宇宙新聞 民時新聞／記者張德欽、張珊瑜、張祐瑄、張耿慈、黃園淋",
+    categories: ["議會 / 政策","在地建設"],
+    href: "https://macrocosm.tw/%E6%9D%B1%E5%8D%80%E8%A6%AA%E5%AD%90%E9%A4%A8%E6%8B%96%E9%80%BE2%E5%B9%B4%E4%BB%8D%E6%9C%AA%E9%96%8B%E3%80%80%E5%B8%82%E8%AD%B0%E5%93%A1%E9%99%B3%E9%9B%85%E6%83%A0%E8%BF%BD%E5%95%8F%EF%BC%9A%E5%88%B0/"
+  },
+  {
     title: "校園交通不能等陳情　陳雅惠促市府逐校盤點改善",
     desc: "點一下看更多",
     date: "2026-08-03",
