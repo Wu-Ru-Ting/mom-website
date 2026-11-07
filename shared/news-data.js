@@ -34,6 +34,14 @@ window.NEWS_DATA = [
 
   // 可點連結的卡片
   {
+    title: "「騎到哪裡，服務到哪裡！」民進黨台中市東南區市議員候選人3號陳雅惠自行車掃街 揪出台中公共自行車兩大痛點",
+    desc: "點一下看更多",
+    date: "2026-11-06",
+    source: "元丰傳媒／記者林獻元",
+    categories: ["交通建設"],
+    href: "https://www.yuanfengmedia.tw/detail.php?type=lastest&id=62853"
+  },
+  {
     title: "樹倒才處理太慢！ 市議員陳雅惠促中市府全面盤點高風險樹木 兼顧市民安全與城市綠意",
     desc: "點一下看更多",
     date: "2026-09-01",
